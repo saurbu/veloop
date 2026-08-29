@@ -9,13 +9,8 @@
 
 .bal-1 {
     min-width: 0;
-<<<<<<< HEAD
-    background-color: rgba(191, 20, 206, 0.1);
-    border: 1px solid rgb(202, 15, 208);
-=======
     background-color: rgba(190, 188, 188, 0.1);
     border: 1px solid gray;
->>>>>>> 3addd1edf7e95aa9b72ec268d43ed10c453e2106
     border-radius: 15px;
     padding: 20px;
     display: flex;
@@ -23,14 +18,10 @@
     gap: 25px;
     box-sizing: border-box;
 }
-<<<<<<< HEAD
 .bal-1.ve {
     background-color: rgba(216, 213, 21, 0.1);
     border-color: gold;
 }
-=======
->>>>>>> 3addd1edf7e95aa9b72ec268d43ed10c453e2106
-
 .avl {
     color: rgb(206, 204, 204);
     font-size: 1rem;
