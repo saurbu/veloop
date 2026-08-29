@@ -1,9 +1,12 @@
 body{
     background-color: #161827;
     text-decoration: white;
+<<<<<<< HEAD
 }
 .btm{
     display: grid;
     margin: 40px auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+=======
+>>>>>>> 3addd1edf7e95aa9b72ec268d43ed10c453e2106
 }

@@ -5,8 +5,12 @@ const Conversion = () => {
     const gems =[
         {name: 'Daily Gem Boost', status: 'Popular', gems: '33', ve : '157', desc: 'Watch add', color:'blue'},
         {name: 'Supper Reward', status: 'Best Value', gems: '35', ve : '216', desc: 'Watch add', color:'gold'},
+<<<<<<< HEAD
         {name: 'Mega Reward', status: 'Daily', gems: '30', ve : '183', desc: 'Watch add', color:'blue'},
         // {name: 'Mega Reward', status: 'Daily', gems: '31', ve : '183', desc: 'Watch add', color:'blue'},
+=======
+        {name: 'Mega Reward', status: 'Daily', gems: '30', ve : '183', desc: 'Watch add', color:'blue'}
+>>>>>>> 3addd1edf7e95aa9b72ec268d43ed10c453e2106
     ]
   return (
     <div className="con">

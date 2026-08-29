@@ -24,7 +24,11 @@ const Balance = () => {
             <span className='info'><Info /> What are Gems?</span>
         </div>
       </div>
+<<<<<<< HEAD
       <div className='bal-1 ve'>
+=======
+      <div className='bal-1'>
+>>>>>>> 3addd1edf7e95aa9b72ec268d43ed10c453e2106
         <div className="coin-wrapper">
         <div className="coin-glow" />
 
