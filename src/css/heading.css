@@ -1,0 +1,100 @@
+.exchange-header {
+    padding: 1% 2%;
+}
+.exchange-text {
+    text-align: left;
+}
+
+.text-ppl {
+    color: rgb(236, 16, 236);
+    font-weight: 600;
+}
+
+.text-gld {
+    color: gold;
+    font-weight: 600;
+}
+
+.p1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.p2 {
+    color: rgb(159, 159, 159);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.exchange-gems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 991px) {
+    .exchange-header {
+        padding-top: 50px;
+    }
+    .exchange-text {
+        padding-right: 35px;
+    }
+    .exchange-gems {
+        padding-left: 35px;
+    }
+    .p1 {
+        font-size: 1.3rem;
+    }
+    .p2 {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .exchange-header {
+        padding-top: 35px;
+        padding-bottom: 30px;
+    }
+    .exchange-text {
+        text-align: center;
+        padding: 0 20px;
+    }
+    .exchange-text .h1 {
+        margin-bottom: 15px;
+        font-size: 2rem;
+    }
+    .p1 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    .p2 {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    .exchange-gems {
+        margin-top: 40px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .exchange-header {
+        padding-top: 25px;
+    }
+    .exchange-text {
+        padding: 0 15px;
+    }
+    .exchange-text .h1 {
+        font-size: 1.75rem;
+    }
+    .p1 {
+        font-size: 1.05rem;
+    }
+    .p2 {
+        font-size: 0.85rem;
+    }
+    .exchange-gems {
+        margin-top: 35px;
+    }
+}

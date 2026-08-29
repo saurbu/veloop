@@ -1,0 +1,125 @@
+.bal {
+    width: 100%;
+    padding: 1% 6%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.bal-1 {
+    min-width: 0;
+    background-color: rgba(191, 20, 206, 0.1);
+    border: 1px solid rgb(202, 15, 208);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    box-sizing: border-box;
+}
+.bal-1.ve {
+    background-color: rgba(216, 213, 21, 0.1);
+    border-color: gold;
+}
+
+.avl {
+    color: rgb(206, 204, 204);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.bal-1 h2 {
+    margin: 0 0 5px;
+    font-size: 2rem;
+}
+
+.info {
+    color: rgb(177, 172, 172);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.info svg {
+    width: 16px;
+    height: 16px;
+}
+@media (max-width: 1080px) {
+    .bal {
+        padding: 0 5%;
+        gap: 15px;
+    }
+    .bal-1 {
+        padding: 15px;
+        gap: 18px;
+    }
+    .avl {
+        font-size: 0.9rem;
+    }
+    .bal-1 h2 {
+        font-size: 1.7rem;
+    }
+    .info {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .bal {
+        padding: 0 25px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .bal-1 {
+        padding: 18px 20px;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 500px) {
+    .bal {
+        padding: 0 15px;
+        gap: 15px;
+    }
+    .bal-1 {
+        padding: 15px;
+        gap: 15px;
+    }
+    .avl {
+        font-size: 0.8rem;
+    }
+    .bal-1 h2 {
+        font-size: 1.5rem;
+    }
+    .info {
+        font-size: 0.7rem;
+    }
+    .info svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .bal {
+        padding: 0 10px;
+    }
+    .bal-1 {
+        padding: 12px;
+        gap: 12px;
+    }
+    .avl {
+        font-size: 0.72rem;
+    }
+    .bal-1 h2 {
+        font-size: 1.35rem;
+    }
+    .info {
+        font-size: 0.65rem;
+    }
+}

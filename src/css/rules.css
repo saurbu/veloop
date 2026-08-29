@@ -1,0 +1,182 @@
+.rules-card {
+  width: 100%;
+}
+
+.rules-desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rules-desktop h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.rules-mobile {
+  display: none;
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+.rule-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  color: #ffffff;
+
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.rule-item span {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+}
+
+.rule-icon {
+  width: 17px;
+  height: 17px;
+
+  flex-shrink: 0;
+
+  color: #ffae00;
+
+  filter:
+    drop-shadow(0 0 5px rgba(255, 174, 0, 0.45));
+}
+
+@media (max-width: 1024px) {
+  .rules-card {
+    padding: 20px;
+  }
+
+  .rules-desktop {
+    gap: 16px;
+  }
+
+  .rules-desktop h3 {
+    font-size: 1.2rem;
+  }
+
+  .rules-list {
+    gap: 13px;
+  }
+
+  .rule-item {
+    font-size: 1.05rem;
+
+    gap: 8px;
+  }
+
+  .rule-icon {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .rules-card {
+    padding: 15px;
+  }
+
+  .rules-desktop {
+    display: none;
+  }
+
+  .rules-mobile {
+    display: block;
+  }
+
+  .rules-mobile summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 25px;
+
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .rules-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .rules-mobile summary h3 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .rules-mobile[open] {
+    padding-bottom: 2px;
+  }
+
+  .rules-mobile .rules-list {
+    margin-top: 15px;
+
+    gap: 11px;
+
+    padding-top: 2px;
+  }
+
+  .rule-item {
+    align-items: flex-start;
+
+    font-size: 1.2rem;
+
+    line-height: 1.45;
+
+    gap: 8px;
+  }
+
+  .rule-icon {
+    width: 14px;
+    height: 14px;
+
+    margin-top: 2px;
+  }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 400px) {
+  .rules-card {
+    padding: 13px;
+  }
+
+  .rules-mobile summary h3 {
+    font-size: 0.98rem;
+  }
+
+  .rules-mobile .rules-list {
+    margin-top: 12px;
+
+    gap: 9px;
+  }
+
+  .rule-item {
+    font-size: 0.7rem;
+  }
+}
