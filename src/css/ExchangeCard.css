@@ -1,8 +1,7 @@
 .exchange-wrapper {
   width: 100%;
   box-sizing: border-box;
-    margin-bottom: 15px;
-  /* PC: approximately 100px on both sides */
+  margin-bottom: 15px;
   padding-left: 90px;
   padding-right: 90px;
 }
