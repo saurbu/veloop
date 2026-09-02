@@ -11,7 +11,7 @@
 .con h1 {
     margin: 0 0 8px;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 700; 
 }
 
 .con > div:first-child p {
@@ -132,11 +132,14 @@
     margin: 10px 0 18px;
 }
 
+.grm .arw {
+    display: flex;
+    gap: 10px;
+}
 .grm h4 {
     margin: 0;
     font-size: 1.2rem;
     font-weight: 700;
-    white-space: nowrap;
 }
 
 .txt-gem {
@@ -154,7 +157,7 @@
     width: 55px;
     height: 25px;
     flex-shrink: 0;
-    transform: rotate(80deg);
+    transform: rotate(360deg);
 }
 
 .arrow::before {
@@ -185,6 +188,7 @@
 .grm p {
     width: 100%;
     margin: 0;
+    cursor: pointer;
     text-align: center;
     color: rgb(155, 155, 155);
     font-size: 0.85rem;
@@ -208,6 +212,9 @@
 @media (max-width: 900px) {
     .con {
         padding: 35px 4%;
+    }
+    .cnv h1{
+        font-size: 28px;
     }
     .container-card {
         grid-template-columns: 1fr;
@@ -282,7 +289,13 @@
     .con > div:first-child p {
         font-size: 0.9rem;
     }
-
+    .cnv h1{
+        font-size: 18px;
+        text-align: left;
+    }
+    .cnv p{
+        display: none;
+    }
     .container-card {
         grid-template-columns: 1fr;
         max-width: 100%;
@@ -364,7 +377,12 @@
     .con {
         padding: 25px 12px;
     }
-
+    .cnv h1{
+        font-size: 18px;
+    }
+    .cnv p{
+        display: none;
+    }
     .container-card {
         max-width: 100%;
     }

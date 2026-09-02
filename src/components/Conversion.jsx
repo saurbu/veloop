@@ -9,8 +9,8 @@ const Conversion = () => {
     ]
   return (
     <div className="con">
-      <div>
-        <h1>Available Conversions</h1>
+      <div className='cnv'>
+        <h1>Fast Conversions</h1>
         <p>Find the best conversion option for your Gems</p>
       </div>
       <div className='container-card'>
@@ -35,17 +35,19 @@ const Conversion = () => {
                         />
                     </div>
                     <div className='grm'>
-                        <h4 >{value.gems} <span className='txt-gem'>Gems</span></h4>
-                        <div className="arrow">
-                            <span />
-                            <span />
+                        <div className='arw'>
+                            <h4 >{value.gems} <span className='txt-gem'>Gems</span></h4>
+                            <div className="arrow">
+                                <span />
+                                <span />
+                            </div>
+                            <h4 >{value.ve} <span className='txt-ve'>VEs</span></h4>
                         </div>
-                        <h4 >{value.ve} <span className='txt-ve'>VEs</span></h4>
-                        <p>{value.desc}</p>
                         <button 
                         type='button'
                         className='btn btn-primary'
                         >Convert Reward</button>
+                        <p>{value.desc}</p>
                     </div>
                 </div>
             </div>

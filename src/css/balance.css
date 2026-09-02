@@ -1,124 +1,459 @@
 .bal {
     width: 100%;
-    padding: 1% 6%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    padding: 0 90px;
     box-sizing: border-box;
 }
 
-.bal-1 {
-    min-width: 0;
-    background-color: rgba(190, 188, 188, 0.1);
-    border: 1px solid gray;
-    border-radius: 15px;
-    padding: 20px;
+.balance-card {
+    width: 100%;
+    height: 100px;
     display: flex;
     align-items: center;
-    gap: 25px;
     box-sizing: border-box;
+    border: 1px solid rgba(130, 145, 170, 0.35);
+    border-radius: 12px;
+    background: rgba(13, 25, 45, 0.45);
+    overflow: hidden;
 }
-.bal-1.ve {
-    background-color: rgba(216, 213, 21, 0.1);
-    border-color: gold;
+
+.balance-item {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 38px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
+
+.balance-divider {
+    width: 1px;
+    height: 65%;
+    background: rgba(130, 145, 170, 0.25);
+    flex-shrink: 0;
+}
+
+.balance-icon {
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.gem-balance-icon {
+    margin-right: 18px;
+}
+
+.balance-content {
+    min-width: 0;
+    overflow: hidden;
+}
+
 .avl {
     color: rgb(206, 204, 204);
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin: 0 0 5px;
+    margin: 0 0 4px;
+    white-space: nowrap;
 }
 
-.bal-1 h2 {
-    margin: 0 0 5px;
-    font-size: 2rem;
+.balance-content h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.1;
+    color: #a855f7;
+    white-space: nowrap;
 }
 
-.info {
-    color: rgb(177, 172, 172);
+.balance-item:nth-child(3) .balance-content h2 {
+    color: #1677ff;
+}
+
+.balance-label {
+    display: block;
+    color: rgb(190, 190, 190);
+    font-size: 0.75rem;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+.balance-info {
+    width: 17px;
+    height: 17px;
+    margin-left: 10px;
+    color: #a855f7;
+    flex-shrink: 0;
+}
+
+.balance-item:nth-child(3) .balance-info {
+    color: #1677ff;
+}
+
+.balance-card .gem-wrapper {
+    position: relative;
+    width: 62px;
+    height: 70px;
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    cursor: pointer;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.info svg {
-    width: 16px;
-    height: 16px;
+.balance-card .gem {
+    position: relative;
+    width: 52px;
+    height: 64px;
+    z-index: 2;
+    clip-path: polygon(
+        18% 0%,
+        82% 0%,
+        100% 25%,
+        82% 75%,
+        18% 75%,
+        0% 25%
+    );
+    background: linear-gradient(
+        145deg,
+        #f3d8ff 0%,
+        #d477ff 20%,
+        #a855f7 45%,
+        #7c25d1 70%,
+        #4c128c 100%
+    );
+    filter: none;
+    animation: none;
 }
-@media (max-width: 1080px) {
-    .bal {
-        padding: 0 5%;
-        gap: 15px;
+
+.balance-card .gem::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.65),
+        rgba(255,255,255,0.15) 30%,
+        transparent 55%
+    );
+    clip-path: polygon(
+        18% 0%,
+        82% 0%,
+        100% 25%,
+        50% 48%,
+        0% 25%
+    );
+}
+
+.balance-card .gem::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 35%,
+        rgba(255,255,255,0.15) 50%,
+        rgba(53,7,91,0.55) 100%
+    );
+    clip-path: polygon(
+        50% 48%,
+        100% 25%,
+        82% 75%,
+        18% 75%,
+        0% 25%
+    );
+}
+
+.balance-card .gem-glow,
+.balance-card .gem-shadow,
+.balance-card .coin-glow,
+.balance-card .coin-shadow {
+    display: none;
+}
+
+.balance-card .coin-wrapper {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.balance-card .coin {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle at 35% 28%,
+            #fff5ad 0%,
+            #ffd94d 18%,
+            #f5b719 50%,
+            #c98108 78%,
+            #7a4500 100%
+        );
+    border: 3px solid #f5c542;
+    box-shadow: none;
+    animation: none;
+}
+
+.balance-card .coin::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: none;
+}
+
+.balance-card .coin-inner {
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255,235,120,0.8);
+    background: radial-gradient(
+        circle,
+        #f7c52f,
+        #d9920b
+    );
+}
+
+.balance-card .coin-inner span {
+    font-family: Inter, Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff7c5;
+    text-shadow: none;
+}
+
+@media (max-width: 1100px) {
+    .balance-item {
+        padding: 10px 22px;
     }
-    .bal-1 {
-        padding: 15px;
-        gap: 18px;
+
+    .balance-icon {
+        width: 62px;
+        height: 62px;
+        flex-basis: 62px;
     }
+
+    .gem-balance-icon {
+        margin-right: 12px;
+    }
+
+    .balance-card .gem-wrapper {
+        width: 56px;
+        height: 64px;
+    }
+
+    .balance-card .gem {
+        width: 48px;
+        height: 59px;
+    }
+
+    .balance-card .coin-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+
+    .balance-card .coin {
+        width: 54px;
+        height: 54px;
+    }
+
+    .balance-card .coin-inner {
+        inset: 9px;
+    }
+
+    .balance-card .coin-inner span {
+        font-size: 15px;
+    }
+
     .avl {
-        font-size: 0.9rem;
+        font-size: 0.78rem;
     }
-    .bal-1 h2 {
-        font-size: 1.7rem;
+
+    .balance-content h2 {
+        font-size: 1.55rem;
     }
-    .info {
-        font-size: 0.75rem;
+
+    .balance-label {
+        font-size: 0.68rem;
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
     .bal {
-        padding: 0 25px;
-        grid-template-columns: 1fr;
-        gap: 15px;
+        padding: 0 20px;
     }
-    .bal-1 {
-        padding: 18px 20px;
-        gap: 25px;
-    }
-}
 
-@media (max-width: 500px) {
-    .bal {
-        padding: 0 15px;
-        gap: 15px;
+    .balance-card {
+        height: 82px;
+        border-radius: 10px;
     }
-    .bal-1 {
-        padding: 15px;
-        gap: 15px;
+
+    .balance-item {
+        padding: 6px 10px;
     }
+
+    .balance-icon {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+    }
+
+    .gem-balance-icon {
+        margin-right: 7px;
+    }
+
+    .balance-card .gem-wrapper {
+        width: 44px;
+        height: 50px;
+    }
+
+    .balance-card .gem {
+        width: 37px;
+        height: 46px;
+    }
+
+    .balance-card .coin-wrapper {
+        width: 45px;
+        height: 45px;
+    }
+
+    .balance-card .coin {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+    }
+
+    .balance-card .coin-inner {
+        inset: 7px;
+        border-width: 1px;
+    }
+
+    .balance-card .coin-inner span {
+        font-size: 11px;
+    }
+
     .avl {
-        font-size: 0.8rem;
+        font-size: 0.62rem;
+        margin-bottom: 2px;
     }
-    .bal-1 h2 {
-        font-size: 1.5rem;
+
+    .balance-content h2 {
+        font-size: 1.2rem;
     }
-    .info {
-        font-size: 0.7rem;
+
+    .balance-label {
+        font-size: 0.55rem;
     }
-    .info svg {
-        width: 14px;
-        height: 14px;
+
+    .balance-info {
+        display: none;
+    }
+
+    .balance-divider {
+        height: 60%;
     }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 450px) {
     .bal {
-        padding: 0 10px;
+        padding: 0 20px;
     }
-    .bal-1 {
-        padding: 12px;
-        gap: 12px;
+
+    .balance-card {
+        height: 72px;
     }
+
+    .balance-item {
+        padding: 5px 7px;
+    }
+
+    .balance-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+
+    .gem-balance-icon {
+        margin-right: 5px;
+    }
+
+    .balance-card .gem-wrapper {
+        width: 38px;
+        height: 44px;
+    }
+
+    .balance-card .gem {
+        width: 32px;
+        height: 40px;
+    }
+
+    .balance-card .coin-wrapper {
+        width: 38px;
+        height: 38px;
+    }
+
+    .balance-card .coin {
+        width: 34px;
+        height: 34px;
+        border-width: 2px;
+    }
+
+    .balance-card .coin-inner {
+        inset: 6px;
+    }
+
+    .balance-card .coin-inner span {
+        font-size: 9px;
+    }
+
     .avl {
-        font-size: 0.72rem;
+        font-size: 0.54rem;
     }
-    .bal-1 h2 {
-        font-size: 1.35rem;
+
+    .balance-content h2 {
+        font-size: 1rem;
     }
-    .info {
-        font-size: 0.65rem;
+
+    .balance-label {
+        font-size: 0.48rem;
     }
+}
+
+.balance-card .gem-wrapper::before,
+.balance-card .gem-wrapper::after,
+.balance-card .coin-wrapper::before,
+.balance-card .coin-wrapper::after {
+    display: none !important;
+    content: none !important;
+}
+
+.balance-card .gem-glow,
+.balance-card .gem-shadow,
+.balance-card .coin-glow,
+.balance-card .coin-shadow {
+    display: none !important;
+    opacity: 0 !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+.balance-card .gem {
+    filter: none !important;
+}
+
+.balance-card .coin {
+    box-shadow: none !important;
+    filter: none !important;
 }

@@ -53,48 +53,182 @@
 
 @media (max-width: 767px) {
     .exchange-header {
-        padding-top: 35px;
-        padding-bottom: 30px;
+        position: relative;
+        padding-top: 20px;
+        padding-bottom: 0;
+        min-height: 230px;
+        overflow: hidden;
     }
+
     .exchange-text {
-        text-align: center;
-        padding: 0 20px;
+        position: relative;
+        z-index: 2;
+        text-align: left;
+        padding: 0 15px;
     }
+
     .exchange-text .h1 {
-        margin-bottom: 15px;
-        font-size: 2rem;
-    }
-    .p1 {
-        font-size: 1.2rem;
         margin-bottom: 10px;
+        font-size: 1.55rem;
     }
+
+    .p1 {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin-bottom: 6px;
+        max-width: 170px;
+    }
+
     .p2 {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        max-width: 230px;
+        margin-bottom: 0;
     }
+
     .exchange-gems {
-        margin-top: 40px;
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        transform: translateX(-50%);
+        width: 100%;
         padding: 0;
+        margin: 0;
+        z-index: 1;
+    }
+
+    .exchange-visual {
+        width: 350px !important;
+        height: 170px !important;
+        max-width: none;
+        transform: none !important;
+    }
+
+    .gem-wrapper {
+        width: 95px;
+        height: 120px;
+    }
+
+    .gem {
+        width: 58px;
+        height: 74px;
+    }
+
+    .gem-wrapper::before {
+        width: 70px;
+        height: 70px;
+    }
+
+    .gem-wrapper::after {
+        width: 65px;
+    }
+
+    .exchange-arrow {
+        width: 55px;
+    }
+
+    .exchange-arrow::before {
+        width: 42px;
+    }
+
+    .exchange-arrow::after {
+        width: 13px;
+        height: 13px;
+    }
+
+    .coin-wrapper {
+        width: 105px;
+        height: 130px;
+    }
+
+    .coin {
+        width: 76px;
+        height: 76px;
+    }
+
+    .coin-glow {
+        width: 85px;
+        height: 85px;
+    }
+
+    .coin-shadow {
+        width: 85px;
     }
 }
 
 @media (max-width: 480px) {
     .exchange-header {
-        padding-top: 25px;
+        padding-top: 18px;
+        min-height: 195px;
     }
+
     .exchange-text {
         padding: 0 15px;
+        text-align: left;
     }
+
     .exchange-text .h1 {
-        font-size: 1.75rem;
+        font-size: 1.35rem;
+        margin-bottom: 8px;
     }
+
     .p1 {
-        font-size: 1.05rem;
-    }
-    .p2 {
         font-size: 0.85rem;
+        max-width: 150px;
     }
+
+    .p2 {
+        display: none;
+    }
+
     .exchange-gems {
-        margin-top: 35px;
+        bottom: -8px;
+    }
+
+    .exchange-visual {
+        width: 320px !important;
+        height: 155px !important;
+    }
+
+    .gem-wrapper {
+        width: 85px;
+        height: 105px;
+    }
+
+    .gem {
+        width: 52px;
+        height: 67px;
+    }
+
+    .gem-wrapper::before {
+        width: 65px;
+        height: 65px;
+    }
+
+    .gem-wrapper::after {
+        width: 58px;
+    }
+
+    .exchange-arrow {
+        width: 48px;
+    }
+
+    .exchange-arrow::before {
+        width: 36px;
+    }
+
+    .exchange-arrow::after {
+        width: 12px;
+        height: 12px;
+    }
+
+    .coin-wrapper {
+        width: 100px;
+        height: 120px;
+    }
+
+    .coin {
+        width: 76px;
+        height: 76px;
     }
 }

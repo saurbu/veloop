@@ -1,6 +1,7 @@
 import Balance from '../components/Balance'
 import Conversion from '../components/Conversion'
 import ConversionHistory from '../components/ConversionHistory'
+import ExchangeCard from '../components/ExchangeCard'
 import Header from '../components/Header'
 import Rules from '../components/Rules'
 
@@ -11,8 +12,9 @@ const Earning = () => {
     <div>
       <Header />
       <Balance />
-      <Conversion />
+      <ExchangeCard />
       <Work />
+      <Conversion />
       <div className='btm'>
         <ConversionHistory />
         <Rules />
