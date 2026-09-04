@@ -36,6 +36,7 @@
 @media (max-width: 991px) {
     .exchange-header {
         padding-top: 50px;
+        width: 90%;
     }
     .exchange-text {
         padding-right: 35px;
@@ -159,6 +160,7 @@
 @media (max-width: 480px) {
     .exchange-header {
         padding-top: 18px;
+        padding-left: 18px;
         min-height: 195px;
     }
 

@@ -12,7 +12,7 @@ const ConversionHistory = () => {
       <div className="containers-card">
         <details className="history-dropdown">
           <summary>
-            <h3> Conversion History</h3>
+            <h3> Conversion History</h3> 
               <ChevronDown />
           </summary>
 

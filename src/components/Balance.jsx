@@ -1,5 +1,7 @@
 import "../css/balance.css";
 import { Info } from "lucide-react";
+import gem from '../assets/gems.png'
+import ves from '../assets/ves.png'
 
 const Balance = () => {
   return (
@@ -8,12 +10,7 @@ const Balance = () => {
         <div className="balance-item">
           <div className="balance-icon gem-balance-icon">
             <div className="gem-wrapper">
-              <div className="gem">
-                <div className="gem-face gem-top" />
-                <div className="gem-face gem-left" />
-                <div className="gem-face gem-right" />
-                <div className="gem-face gem-bottom" />
-              </div>
+              <img src={gem} alt="gem" />
             </div>
           </div>
 
@@ -31,11 +28,7 @@ const Balance = () => {
         <div className="balance-item">
           <div className="balance-icon">
             <div className="coin-wrapper">
-              <div className="coin">
-                <div className="coin-inner">
-                  <span>VE</span>
-                </div>
-              </div>
+              <img src={ves} alt="" />
             </div>
           </div>
 

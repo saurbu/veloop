@@ -88,8 +88,8 @@
 }
 
 /* ---------- shared wrapper / podium ---------- */
-.gem-wrapper,
-.coin-wrapper {
+.gem-wrapper1,
+.coin-wrapper1 {
   position: relative;
   width: 170px;
   height: 200px;
@@ -98,9 +98,11 @@
   justify-content: center;
   z-index: 2;
 }
-
-.gem-wrapper::before,
-.coin-wrapper::before {
+.coin-wrapper1 .ve-img{
+  width: 150px;
+}
+.gem-wrapper1::before,
+.coin-wrapper1::before {
   content: "";
   position: absolute;
   bottom: 26px;
@@ -111,8 +113,8 @@
   z-index: 0;
 }
 
-.gem-wrapper::before { background: rgba(168, 85, 247, 0.5); }
-.coin-wrapper::before { background: rgba(245, 197, 66, 0.5); }
+.gem-wrapper1::before { background: rgba(168, 85, 247, 0.5); }
+.coin-wrapper1::before { background: rgba(245, 197, 66, 0.5); }
 
 /* base drum beneath the glowing rim, for a two-tier pedestal look */
 .podium-base {
@@ -129,14 +131,14 @@
   box-shadow: 0 0 22px rgba(168, 85, 247, 0.25);
 }
 
-.coin-wrapper .podium-base {
+.coin-wrapper1 .podium-base {
   background: radial-gradient(ellipse at center, rgba(150, 100, 10, 0.85) 0%, rgba(70, 45, 5, 0.75) 55%, transparent 100%);
   box-shadow: 0 0 22px rgba(245, 197, 66, 0.25);
 }
 
 /* podium disc */
 .gem-wrapper::after,
-.coin-wrapper::after {
+.coin-wrapper1::after {
   content: "";
   position: absolute;
   bottom: 8px;
@@ -156,7 +158,7 @@
   border: 1px solid rgba(200, 140, 255, 0.35);
 }
 
-.coin-wrapper::after {
+.coin-wrapper1::after {
   background:
     radial-gradient(ellipse at center, rgba(245, 197, 66, 0.55) 0%, rgba(180, 120, 10, 0.35) 45%, rgba(60, 35, 5, 0.15) 70%, transparent 100%);
   box-shadow:
@@ -278,7 +280,9 @@
   z-index: 1;
   animation: glowPulse 2.8s ease-in-out infinite;
 }
-
+.gem-wrapper1 img{
+  width: 150px;
+}
 .gem-shadow { display: none; }
 
 /* ---------- coin ---------- */
@@ -354,7 +358,6 @@
   z-index: 1;
   animation: glowPulse 2.5s ease-in-out infinite;
 }
-
 .coin-shadow { display: none; }
 
 /* ---------- animated arrow ---------- */
@@ -477,24 +480,16 @@
         height: 85px;
     }
 
-    .coin-wrapper {
+    .coin-wrapper1 {
         width: 90px;
         height: 120px;
     }
-
-    .coin {
-        width: 65px;
-        height: 65px;
+    .coin-wrapper1 .ve-img{
+      width: 120px;
     }
-
-    .coin-inner {
-        inset: 11px;
+    .gem-wrapper1 img{
+      width: 100px;
     }
-
-    .coin-inner span {
-        font-size: 17px;
-    }
-
     .exchange-arrow {
         width: 58px;
         height: 35px;
@@ -546,22 +541,12 @@
         height: 78px;
     }
 
-    .coin-wrapper {
+    .coin-wrapper1 {
         width: 80px;
         height: 115px;
     }
-
-    .coin {
-        width: 58px;
-        height: 58px;
-    }
-
-    .coin-inner {
-        inset: 9px;
-    }
-
-    .coin-inner span {
-        font-size: 15px;
+    .coin-wrapper1 .ve-img{
+      width: 80px;
     }
 
     .exchange-arrow {

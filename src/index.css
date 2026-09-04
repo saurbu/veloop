@@ -4,6 +4,6 @@ body{
 }
 .btm{
     display: grid;
-    margin: 40px auto;
+    margin: 10px auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
