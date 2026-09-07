@@ -14,13 +14,15 @@ const Balance = () => {
             </div>
           </div>
 
-          <div className="balance-content">
-            <p className="avl">Available Gems</p>
-            <h2>420</h2>
-            <span className="balance-label">Gems</span>
-          </div>
+          <div className="min">
+            <div className="balance-content">
+              <p className="avl">Available Gems</p>
+              <h2>420</h2>
+              <span className="balance-label">Gems</span>
+            </div>
 
-          <Info className="balance-info" />
+            <Info className="balance-info" />
+          </div>
         </div>
 
         <div className="balance-divider" />
@@ -32,13 +34,15 @@ const Balance = () => {
             </div>
           </div>
 
-          <div className="balance-content">
-            <p className="avl">Available VEs</p>
-            <h2>3,850</h2>
-            <span className="balance-label">VEs</span>
-          </div>
+          <div className="min">
+            <div className="balance-content">
+              <p className="avl">Available VEs</p>
+              <h2>3,850</h2>
+              <span className="balance-label">VEs</span>
+            </div>
 
-          <Info className="balance-info" />
+            <Info className="balance-info" />
+          </div>
         </div>
       </div>
     </div>

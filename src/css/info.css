@@ -1,7 +1,8 @@
 .conversion-info-wrapper {
     width: 100%;
+    /* margin-top: -10px; */
     box-sizing: border-box;
-    padding: 0px 90px;
+    padding: 0px 6%;
     margin-bottom: 20px;
 }
 
@@ -113,7 +114,7 @@
 
 @media (max-width: 1100px) {
     .conversion-info-wrapper {
-        padding: 0 20px;
+        padding: 0 6%;
         margin-bottom: 15px;
     }
 
@@ -220,7 +221,8 @@
 
 @media (max-width: 650px) {
     .conversion-info-wrapper {
-        padding: 0 17px;
+        padding: 0 4%;
+        margin-top: -10px;
         margin-bottom: 12px;
     }
 
@@ -267,18 +269,19 @@
 
     .conversion-info-mobile-item .conversion-info-content h4 {
         margin-bottom: 3px;
-        font-size: 9px;
+        font-size: 15px;
     }
 
     .conversion-info-mobile-item .conversion-info-content p {
-        font-size: 7.5px;
+        font-size: 9.5px;
         line-height: 1.4;
     }
 }
 
 @media (max-width: 400px) {
     .conversion-info-wrapper {
-        padding: 0 12px;
+        padding-top: 10px;
+        padding: 0 13px;
     }
 
     .conversion-info-dropdown {
@@ -292,7 +295,7 @@
     }
 
     .conversion-info-dropdown summary h3 {
-        font-size: 10px;
+        font-size: 15px;
     }
 
     .conversion-info-dropdown summary svg {
