@@ -521,6 +521,7 @@
     .exchange-visual {
         width: 100vw;
         max-width: none;
+        margin-right: -10px;
         height: 165px;
         gap: 8px;
         margin-left: calc(50% - 50vw);

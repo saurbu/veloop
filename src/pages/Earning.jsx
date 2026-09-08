@@ -10,7 +10,7 @@ import Work from '../components/Work'
 
 const Earning = () => {
   return (
-    <div>
+    <div className='erng'>
       <Header />
       <Balance />
       <ExchangeCard />

@@ -1,5 +1,5 @@
 .exchange-header {
-    padding: 1% 2%;
+    padding: 0% 2%;
 }
 .exchange-text {
     text-align: left;
@@ -35,8 +35,9 @@
 
 @media (max-width: 991px) {
     .exchange-header {
-        padding-top: 50px;
-        width: 90%;
+        padding-top: 10px;
+        width: 100%;
+        padding: 0 10px 1px 5px;
     }
     .exchange-text {
         padding-right: 35px;
@@ -160,8 +161,9 @@
 @media (max-width: 480px) {
     .exchange-header {
         padding-top: 18px;
-        padding-left: 18px;
+        padding-left: 10px;
         min-height: 195px;
+        width: 100%;
     }
 
     .exchange-text {
