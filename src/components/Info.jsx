@@ -1,4 +1,4 @@
-import { ShieldCheck, Zap, RefreshCw, Headphones, ChevronDown } from "lucide-react";
+import { ShieldCheck, Zap, RefreshCw, Headphones, ChevronDown,Gem } from "lucide-react";
 import "../css/info.css";
 
 const Info = () => {
@@ -55,8 +55,16 @@ const Info = () => {
             <div className="conversion-info-mobile">
                 <details className="conversion-info-dropdown">
                     <summary>
-                        <h3>Conversion Information</h3>
-                        <ChevronDown size={29}/>
+                        <div className="conversion-info-title">
+                            <div className="conversion-info-logo">
+                                <Gem size={19} />
+                                <span></span>
+                            </div>
+
+                            <h3>Conversion Information</h3>
+                        </div>
+
+                        <ChevronDown size={24} />
                     </summary>
                     <div className="conversion-info-list">
                         {infoItems.map((item) => {

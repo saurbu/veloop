@@ -82,6 +82,7 @@
     }
 
     .p2 {
+        display: none;
         font-size: 0.75rem;
         line-height: 1.4;
         max-width: 230px;

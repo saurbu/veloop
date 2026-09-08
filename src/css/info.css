@@ -1,8 +1,7 @@
 .conversion-info-wrapper {
     width: 100%;
-    /* margin-top: -10px; */
     box-sizing: border-box;
-    padding: 0px 6%;
+    padding: 0 6%;
     margin-bottom: 20px;
 }
 
@@ -12,7 +11,7 @@
         135deg,
         rgba(13, 25, 45, 0.5),
         rgba(7, 18, 34, 0.5)
-    );    
+    );
 }
 
 .conversion-info-card {
@@ -112,7 +111,148 @@
     display: none;
 }
 
-@media (max-width: 1100px) {
+.conversion-info-dropdown {
+    width: 100%;
+    min-height: 62px;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #252c3d;
+    border-radius: 15px;
+    background: #080d1a;
+    color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.conversion-info-dropdown summary {
+    width: 100%;
+    min-height: 62px;
+    box-sizing: border-box;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    cursor: pointer;
+}
+
+.conversion-info-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.conversion-info-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.conversion-info-logo {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b76cff;
+    border: 1px solid rgba(156, 82, 255, 0.3);
+    border-radius: 11px;
+    background: linear-gradient(
+        135deg,
+        rgba(121, 48, 220, 0.2),
+        rgba(75, 28, 145, 0.08)
+    );
+    box-shadow:
+        0 0 18px rgba(137, 67, 255, 0.12),
+        inset 0 0 12px rgba(137, 67, 255, 0.06);
+}
+
+.conversion-info-logo::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 6px;
+    right: 6px;
+    border-radius: 50%;
+    background: #ffc52e;
+    box-shadow: 0 0 8px rgba(255, 197, 46, 0.55);
+}
+
+.conversion-info-logo span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    left: 6px;
+    bottom: 6px;
+    border-radius: 50%;
+    background: #8d43ff;
+}
+
+.conversion-info-dropdown summary h3 {
+    margin: 0;
+    color: #f1f2f6;
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.conversion-info-dropdown summary > svg {
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.conversion-info-dropdown[open] summary {
+    border-bottom: 1px solid #252c3d;
+}
+
+.conversion-info-dropdown[open] summary > svg {
+    transform: rotate(180deg);
+}
+
+.conversion-info-list {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 18px;
+}
+
+.conversion-info-mobile-item {
+    width: 100%;
+    min-height: 65px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid #252c3d;
+}
+
+.conversion-info-mobile-item:last-child {
+    border-bottom: none;
+}
+
+.conversion-info-mobile-item .conversion-info-icon {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+}
+
+.conversion-info-mobile-item .conversion-info-content h4 {
+    margin-bottom: 4px;
+    font-size: 11px;
+}
+
+.conversion-info-mobile-item .conversion-info-content p {
+    max-width: none;
+    font-size: 9px;
+    line-height: 1.45;
+}
+
+@media (max-width: 900px) {
     .conversion-info-wrapper {
         padding: 0 6%;
         margin-bottom: 15px;
@@ -125,101 +265,9 @@
     .conversion-info-mobile {
         display: block;
     }
-
-    .conversion-info-dropdown {
-        width: 100%;
-        min-height: 48px;
-        box-sizing: border-box;
-        margin: 0;
-        border: 1px solid #252c3d;
-        border-radius: 12px;
-        background: #080d1a;
-        color: #ffffff;
-        overflow: hidden;
-    }
-
-    .conversion-info-dropdown summary {
-        width: 100%;
-        height: 48px;
-        box-sizing: border-box;
-        padding: 0 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        list-style: none;
-        cursor: pointer;
-    }
-
-    .conversion-info-dropdown summary::-webkit-details-marker {
-        display: none;
-    }
-
-    .conversion-info-dropdown summary h3 {
-        margin: 0;
-        color: #f1f2f6;
-        font-size: 13px;
-        line-height: 1;
-        font-weight: 600;
-    }
-
-    .conversion-info-dropdown summary svg {
-        width: 18px;
-        height: 18px;
-        color: #ffffff;
-        font-size: xx-large;
-        flex-shrink: 0;
-        transition: transform 0.2s ease;
-    }
-
-    .conversion-info-dropdown[open] summary {
-        border-bottom: 1px solid #252c3d;
-    }
-
-    .conversion-info-dropdown[open] summary svg {
-        transform: rotate(180deg);
-        font-size: 1.05rem;
-    }
-
-    .conversion-info-list {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 5px 14px;
-    }
-
-    .conversion-info-mobile-item {
-        width: 100%;
-        min-height: 65px;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 9px 0;
-        border-bottom: 1px solid #252c3d;
-    }
-
-    .conversion-info-mobile-item:last-child {
-        border-bottom: none;
-    }
-
-    .conversion-info-mobile-item .conversion-info-icon {
-        width: 36px;
-        min-width: 36px;
-        height: 36px;
-    }
-
-    .conversion-info-mobile-item .conversion-info-content h4 {
-        margin-bottom: 4px;
-        font-size: 11px;
-    }
-
-    .conversion-info-mobile-item .conversion-info-content p {
-        max-width: none;
-        font-size: 9px;
-        line-height: 1.45;
-    }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 750px) {
     .conversion-info-wrapper {
         padding: 0 4%;
         margin-top: -10px;
@@ -227,39 +275,55 @@
     }
 
     .conversion-info-dropdown {
-        min-height: 47px;
+        min-height: 68px;
         border-radius: 15px;
     }
 
     .conversion-info-dropdown summary {
-        height: 47px;
-        padding: 0 12px;
+        min-height: 68px;
+        padding: 0 15px;
+    }
+
+    .conversion-info-title {
+        gap: 11px;
+    }
+
+    .conversion-info-logo {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 11px;
+    }
+
+    .conversion-info-logo svg {
+        width: 20px;
+        height: 20px;
     }
 
     .conversion-info-dropdown summary h3 {
-        font-size: 1.05rem;
+        font-size: 16px;
     }
 
-    .conversion-info-dropdown summary svg {
-        width: 16px;
-        height: 16px;
+    .conversion-info-dropdown summary > svg {
+        width: 21px;
+        height: 21px;
     }
 
     .conversion-info-list {
-        padding: 3px 10px;
+        padding: 5px 12px;
     }
 
     .conversion-info-mobile-item {
-        min-height: 57px;
-        gap: 9px;
-        padding: 7px 0;
+        min-height: 62px;
+        gap: 10px;
+        padding: 8px 0;
     }
 
     .conversion-info-mobile-item .conversion-info-icon {
-        width: 31px;
-        min-width: 31px;
-        height: 31px;
-        border-radius: 7px;
+        width: 34px;
+        min-width: 34px;
+        height: 34px;
+        border-radius: 8px;
     }
 
     .conversion-info-mobile-item .conversion-info-icon svg {
@@ -268,55 +332,87 @@
     }
 
     .conversion-info-mobile-item .conversion-info-content h4 {
-        margin-bottom: 3px;
-        font-size: 15px;
+        margin-bottom: 4px;
+        font-size: 12px;
     }
 
     .conversion-info-mobile-item .conversion-info-content p {
         font-size: 9.5px;
-        line-height: 1.4;
+        line-height: 1.45;
     }
 }
 
 @media (max-width: 400px) {
     .conversion-info-wrapper {
-        padding-top: 10px;
         padding: 0 13px;
+        margin-top: 0;
+        margin-bottom: 12px;
     }
 
     .conversion-info-dropdown {
-        min-height: 45px;
-        border-radius: 9px;
+        min-height: 58px;
+        border-radius: 12px;
     }
 
     .conversion-info-dropdown summary {
-        height: 45px;
-        padding: 0 10px;
+        min-height: 58px;
+        padding: 0 11px;
+    }
+
+    .conversion-info-title {
+        gap: 9px;
+    }
+
+    .conversion-info-logo {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        border-radius: 9px;
+    }
+
+    .conversion-info-logo svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .conversion-info-logo::before {
+        width: 5px;
+        height: 5px;
+        top: 5px;
+        right: 5px;
+    }
+
+    .conversion-info-logo span {
+        width: 3px;
+        height: 3px;
+        left: 5px;
+        bottom: 5px;
     }
 
     .conversion-info-dropdown summary h3 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
-    .conversion-info-dropdown summary svg {
-        width: 15px;
-        height: 15px;
+    .conversion-info-dropdown summary > svg {
+        width: 18px;
+        height: 18px;
     }
 
     .conversion-info-list {
-        padding: 2px 8px;
+        padding: 3px 9px;
     }
 
     .conversion-info-mobile-item {
-        min-height: 53px;
+        min-height: 57px;
         gap: 8px;
-        padding: 6px 0;
+        padding: 7px 0;
     }
 
     .conversion-info-mobile-item .conversion-info-icon {
-        width: 28px;
-        min-width: 28px;
-        height: 28px;
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        border-radius: 7px;
     }
 
     .conversion-info-mobile-item .conversion-info-icon svg {
@@ -325,10 +421,11 @@
     }
 
     .conversion-info-mobile-item .conversion-info-content h4 {
-        font-size: 8.5px;
+        font-size: 10px;
     }
 
     .conversion-info-mobile-item .conversion-info-content p {
-        font-size: 7px;
+        font-size: 7.5px;
+        line-height: 1.4;
     }
 }

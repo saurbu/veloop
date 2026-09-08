@@ -7,7 +7,7 @@ const Rules = () => {
     'Exchange rates are predefined by VeLoop Rewards.',
     'Available conversions may vary from time to time.',
     'Successful conversions cannot be canceled or reversed.',
-    'Make sure your Gems balance is sufficient before converting. ',
+    'Make sure your Gems balance is sufficient before converting.',
   ]
 
   return (
@@ -15,7 +15,20 @@ const Rules = () => {
       <div className="containers-card">
 
         <div className="rules-desktop">
-          <h3>Exchange Rules</h3>
+          <div className="rules-heading">
+            <div className="rules-title">
+              <div className="rules-logo">
+                <ShieldAlert size={19} />
+                <span />
+              </div>
+
+              <h3>Exchange Rules</h3>
+            </div>
+
+            <span className="rules-count">
+              {rules.length} Rules
+            </span>
+          </div>
 
           <div className="rules-list">
             {rules.map((rule, index) => (
@@ -29,8 +42,16 @@ const Rules = () => {
 
         <details className="rules-mobile">
           <summary>
-            <h3>Exchange Rules</h3>
-              <ChevronDown />
+            <div className="rules-title">
+              <div className="rules-logo">
+                <ShieldAlert size={18} />
+                <span />
+              </div>
+
+              <h3>Exchange Rules</h3>
+            </div>
+
+            <ChevronDown />
           </summary>
 
           <div className="rules-list">
