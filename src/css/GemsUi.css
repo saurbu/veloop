@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   max-width: 700px;
-  height: 260px;
+  height: 200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -92,7 +92,7 @@
 .coin-wrapper1 {
   position: relative;
   width: 170px;
-  height: 200px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,7 +137,7 @@
 }
 
 /* podium disc */
-.gem-wrapper::after,
+/* .gem-wrapper::after,
 .coin-wrapper1::after {
   content: "";
   position: absolute;
@@ -146,9 +146,9 @@
   height: 46px;
   border-radius: 50%;
   z-index: 1;
-}
+} */
 
-.gem-wrapper::after {
+/* .gem-wrapper::after {
   background:
     radial-gradient(ellipse at center, rgba(168, 85, 247, 0.55) 0%, rgba(88, 26, 156, 0.35) 45%, rgba(30, 10, 55, 0.15) 70%, transparent 100%);
   box-shadow:
@@ -156,9 +156,9 @@
     0 0 40px rgba(168, 85, 247, 0.4),
     inset 0 8px 14px rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(200, 140, 255, 0.35);
-}
+} */
 
-.coin-wrapper1::after {
+/* .coin-wrapper1::after {
   background:
     radial-gradient(ellipse at center, rgba(245, 197, 66, 0.55) 0%, rgba(180, 120, 10, 0.35) 45%, rgba(60, 35, 5, 0.15) 70%, transparent 100%);
   box-shadow:
@@ -166,10 +166,10 @@
     0 0 40px rgba(245, 197, 66, 0.4),
     inset 0 8px 14px rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 224, 150, 0.35);
-}
+} */
 
 /* ---------- gem ---------- */
-.gem {
+/* .gem {
   position: relative;
   width: 76px;
   height: 94px;
@@ -194,9 +194,9 @@
     drop-shadow(0 0 18px rgba(168, 85, 247, 0.65))
     drop-shadow(0 0 35px rgba(168, 85, 247, 0.35));
   animation: gemFloat 3s ease-in-out infinite;
-}
+} */
 
-.gem::before {
+/* .gem::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -213,7 +213,7 @@
     50% 48%,
     0% 25%
   );
-}
+} */
 
 .gem::after {
   content: "";
@@ -324,7 +324,17 @@
   border-radius: 50%;
   border: 1px solid rgba(255, 244, 153, 0.65);
 }
-
+.coin-glow {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #a855f7;
+  filter: blur(44px);
+  opacity: 0.42;
+  z-index: 1;
+  animation: glowPulse 2.8s ease-in-out infinite;
+}
 .coin-inner {
   position: absolute;
   inset: 18px;
@@ -460,7 +470,7 @@
     .exchange-visual {
         width: 100vw;
         max-width: none;
-        height: 190px;
+        height: 170px;
         gap: 18px;
         margin-left: calc(50% - 50vw);
         margin-right: 0;
@@ -504,18 +514,35 @@
     width: 100%;
     max-width: none;
     height: 190px;
-    gap: 15px;
+    gap: 35px;
     padding: 0;
     margin: 0;
     overflow: visible;
   }
+  .exchange-arrow {
+        width: 50px;
+        height: 32px;
+        margin-left: -10px;
+        margin-top: -20px;
+    }
+     .coin-wrapper1 .ve-img{
+      width: 140px;
+      margin-top: -70px;
+    }
+    .gem-img{
+      width: 180px;
+      margin-top: -20px;
+    }
 }
 
 @media (max-width: 480px) {
   .exchange-visual {
-    height: 170px;
-    gap: 5px;
+    height: 150px;
+    gap: 15px;
   }
+  .coin-wrapper1 .ve-img{
+      width: 140px;
+    }
 }
 @media (max-width: 400px) {
     .exchange-visual {
@@ -547,12 +574,19 @@
         height: 115px;
     }
     .coin-wrapper1 .ve-img{
-      width: 80px;
+      width: 140px;
+      margin-top: -70px;
+    }
+    .gem-img{
+      width: 140px;
+      margin-top: -20px;
     }
 
     .exchange-arrow {
         width: 50px;
         height: 32px;
+        margin-top: -30px;
+        margin-left: -30px;
     }
 
     .exchange-arrow::before {

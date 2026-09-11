@@ -1,480 +1,214 @@
 .bal {
-    width: 100%;
-    padding: 0 90px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
+  width: 100%;
+  padding: 0 90px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
 }
 
 .balance-card {
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    border: 1px solid rgba(130, 145, 170, 0.35);
-    border-radius: 12px;
-    background: rgba(13, 25, 45, 0.45);
-    overflow: hidden;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(130, 145, 170, 0.35);
+  border-radius: 12px;
+  background: rgba(10, 18, 34, 0.72);
+  box-sizing: border-box;
 }
 
 .balance-item {
-    flex: 1 1 0;
-    min-width: 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 10px 38px;
-    box-sizing: border-box;
-    overflow: hidden;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 36px;
+  box-sizing: border-box;
 }
-.balance-item .min{
-    display: flex;
-    /* justify-content: space-between; */
-}
+
 .balance-divider {
-    width: 1px;
-    height: 65%;
-    background: rgba(130, 145, 170, 0.25);
-    flex-shrink: 0;
+  width: 1px;
+  height: 62%;
+  background: rgba(130, 145, 170, 0.3);
+  flex-shrink: 0;
 }
 
 .balance-icon {
-    width: 72px;
-    height: 72px;
-    flex: 0 0 72px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
 }
 
-.gem-balance-icon {
-    margin-right: 18px;
+.balance-icon img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.min {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
 }
 
 .balance-content {
-    min-width: 0;
-    overflow: hidden;
+  min-width: 0;
 }
 
 .avl {
-    color: rgb(206, 204, 204);
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin: 0 0 4px;
-    white-space: nowrap;
+  margin: 0 0 4px;
+  color: #d0d0d4;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .balance-content h2 {
-    margin: 0;
-    font-size: 1.8rem;
-    line-height: 1.1;
-    color: #a855f7;
-    white-space: nowrap;
+  margin: 0;
+  color: #a855f7;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 .balance-item:nth-child(3) .balance-content h2 {
-    color: #1677ff;
+  color: #1677ff;
 }
 
 .balance-label {
-    display: block;
-    color: rgb(190, 190, 190);
-    font-size: 0.75rem;
-    margin-top: 3px;
-    white-space: nowrap;
+  display: block;
+  margin-top: 4px;
+  color: #bdbdc4;
+  font-size: 0.75rem;
+  line-height: 1;
 }
 
 .balance-info {
-    width: 17px;
-    height: 17px;
-    margin-left: 10px;
-    color: #a855f7;
-    cursor: pointer;
-    flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0 10px;
+  color: #a855f7;
+  flex-shrink: 0;
 }
 
 .balance-item:nth-child(3) .balance-info {
-    color: #1677ff;
-}
-
-.balance-card .gem-wrapper {
-    position: relative;
-    width: 62px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.balance-card .gem {
-    position: relative;
-    width: 52px;
-    height: 64px;
-    z-index: 2;
-    clip-path: polygon(
-        18% 0%,
-        82% 0%,
-        100% 25%,
-        82% 75%,
-        18% 75%,
-        0% 25%
-    );
-    background: linear-gradient(
-        145deg,
-        #f3d8ff 0%,
-        #d477ff 20%,
-        #a855f7 45%,
-        #7c25d1 70%,
-        #4c128c 100%
-    );
-    filter: none;
-    animation: none;
-}
-
-.gem-wrapper img{
-    width: 100px;
-}
-
-.balance-card .gem::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        transparent 35%,
-        rgba(255,255,255,0.15) 50%,
-        rgba(53,7,91,0.55) 100%
-    );
-    clip-path: polygon(
-        50% 48%,
-        100% 25%,
-        82% 75%,
-        18% 75%,
-        0% 25%
-    );
-}
-
-.balance-card .gem-glow,
-.balance-card .gem-shadow,
-.balance-card .coin-glow,
-.balance-card .coin-shadow {
-    display: none;
-}
-
-.balance-card .coin-wrapper {
-    position: relative;
-    width: 68px;
-    height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-/* .balance-card .coin {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background:
-        radial-gradient(
-            circle at 35% 28%,
-            #fff5ad 0%,
-            #ffd94d 18%,
-            #f5b719 50%,
-            #c98108 78%,
-            #7a4500 100%
-        );
-    border: 3px solid #f5c542;
-    box-shadow: none;
-    animation: none;
-} */
-
-.coin-wrapper img{
-    width: 90px;
-    margin-left: -40%;
-}
-.balance-card .coin::before {
-    content: "";
-    position: absolute;
-    inset: 7px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.4);
-    box-shadow: none;
-}
- 
-.balance-card .coin-inner {
-    position: absolute;
-    inset: 10px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgba(255,235,120,0.8);
-    background: radial-gradient(
-        circle,
-        #f7c52f,
-        #d9920b
-    );
-}
-
-.balance-card .coin-inner span {
-    font-family: Inter, Arial, sans-serif;
-    font-size: 17px;
-    font-weight: 800;
-    color: #fff7c5;
-    text-shadow: none;
+  color: #1677ff;
 }
 
 @media (max-width: 1100px) {
-    .bal {
-        width: 100%;
-        padding: 0 20px;
-        box-sizing: border-box;
-        margin-bottom: 15px;
-    }
-    .balance-item {
-        padding: 10px 22px;
-    }
+  .bal {
+    padding: 0 30px;
+  }
 
-    .balance-icon {
-        width: 62px;
-        height: 62px;
-        flex-basis: 62px;
-    }
+  .balance-item {
+    padding: 10px 24px;
+  }
 
-    .gem-balance-icon {
-        margin-right: 12px;
-    }
+  .balance-icon {
+    width: 60px;
+    height: 60px;
+    flex-basis: 60px;
+    margin-right: 14px;
+  }
 
-    .balance-card .gem-wrapper {
-        width: 56px;
-        height: 64px;
-    }
+  .balance-icon img {
+    width: 60px;
+    height: 60px;
+  }
 
-    .balance-card .gem {
-        width: 48px;
-        height: 59px;
-    }
-
-    .balance-card .coin-wrapper {
-        width: 60px;
-        height: 60px;
-    }
-    .coin-wrapper img{
-        width: 60px;
-        margin-left: -40%;
-    }
-    .gem-wrapper img{
-        width: 60px;
-        margin-left: -40%;
-    }
-    .balance-card .coin {
-        width: 54px;
-        height: 54px;
-    }
-
-    .balance-card .coin-inner {
-        inset: 9px;
-    }
-
-    .balance-card .coin-inner span {
-        font-size: 15px;
-    }
-
-    .avl {
-        font-size: 0.78rem;
-    }
-
-    .balance-content h2 {
-        font-size: 1.55rem;
-    }
-
-    .balance-label {
-        font-size: 0.68rem;
-    }
+  .balance-content h2 {
+    font-size: 1.55rem;
+  }
 }
 
 @media (max-width: 700px) {
-    .bal {
-        padding: 0 20px;
-    }
+  .bal {
+    padding: 0 20px;
+  }
 
-    .balance-card {
-        height: 82px;
-        border-radius: 10px;
-    }
+  .balance-card {
+    height: 82px;
+    border-radius: 10px;
+  }
 
-    .balance-item {
-        padding: 6px 10px;
-    }
+  .balance-item {
+    padding: 8px 12px;
+  }
 
-    .balance-icon {
-        width: 48px;
-        height: 48px;
-        flex-basis: 48px;
-    }
-    .coin-wrapper img{
-        width: 40px;
-        margin-left: -40%;
-    }
-    .gem-wrapper img{
-        width: 40px;
-        margin-left: -40%;
-    }
-    .gem-balance-icon {
-        margin-right: 7px;
-    }
+  .balance-icon {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+    margin-right: 8px;
+  }
 
-    .balance-card .gem-wrapper {
-        width: 44px;
-        height: 50px;
-    }
+  .balance-icon img {
+    width: 45px;
+    height: 45px;
+  }
 
-    .balance-card .gem {
-        width: 37px;
-        height: 46px;
-    }
+  .avl {
+    font-size: 0.65rem;
+  }
 
-    .balance-card .coin-wrapper {
-        width: 45px;
-        height: 45px;
-    }
+  .balance-content h2 {
+    font-size: 1.25rem;
+  }
 
-    .balance-card .coin {
-        width: 40px;
-        height: 40px;
-        border-width: 2px;
-    }
+  .balance-label {
+    font-size: 0.58rem;
+  }
 
-    .balance-card .coin-inner {
-        inset: 7px;
-        border-width: 1px;
-    }
-
-    .balance-card .coin-inner span {
-        font-size: 11px;
-    }
-
-    .avl {
-        font-size: 0.62rem;
-        margin-bottom: 2px;
-    }
-
-    .balance-content h2 {
-        font-size: 1.2rem;
-    }
-
-    .balance-label {
-        font-size: 0.55rem;
-    }
-
-    .balance-info {
-        display: none;
-    }
-
-    .balance-divider {
-        height: 60%;
-    }
+  .balance-info {
+    display: none;
+  }
 }
 
 @media (max-width: 450px) {
-    .bal {
-        padding: 0 20px;
-    }
+  .bal {
+    padding: 0 20px;
+  }
 
-    .balance-card {
-        height: 72px;
-    }
+  .balance-card {
+    height: 72px;
+  }
 
-    .balance-item {
-        padding: 5px 7px;
-    }
+  .balance-item {
+    padding: 6px 8px;
+  }
 
-    .balance-icon {
-        width: 40px;
-        height: 40px;
-        flex-basis: 40px;
-    }
+  .balance-icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    margin-right: 6px;
+  }
 
-    .gem-balance-icon {
-        margin-right: 5px;
-    }
+  .balance-icon img {
+    width: 34px;
+    height: 34px;
+  }
 
-    .balance-card .gem-wrapper {
-        width: 38px;
-        height: 44px;
-    }
+  .avl {
+    font-size: 0.54rem;
+    margin-bottom: 3px;
+  }
 
-    .balance-card .gem {
-        width: 32px;
-        height: 40px;
-    }
+  .balance-content h2 {
+    font-size: 1rem;
+  }
 
-    .balance-card .coin-wrapper {
-        width: 38px;
-        height: 38px;
-    }
-    .coin-wrapper img{
-        width: 30px;
-        margin-left: -40%;
-    }
-    .gem-wrapper img{
-        width: 30px;
-        margin-left: -40%;
-    }
-    .balance-card .coin {
-        width: 34px;
-        height: 34px;
-        border-width: 2px;
-    }
+  .balance-label {
+    font-size: 0.48rem;
+  }
 
-    .balance-card .coin-inner {
-        inset: 6px;
-    }
-
-    .balance-card .coin-inner span {
-        font-size: 9px;
-    }
-
-    .avl {
-        font-size: 0.54rem;
-    }
-
-    .balance-content h2 {
-        font-size: 1rem;
-    }
-
-    .balance-label {
-        font-size: 0.48rem;
-    }
-}
-
-.balance-card .gem-wrapper::before,
-.balance-card .gem-wrapper::after,
-.balance-card .coin-wrapper::before,
-.balance-card .coin-wrapper::after {
-    display: none !important;
-    content: none !important;
-}
-
-.balance-card .gem-glow,
-.balance-card .gem-shadow,
-.balance-card .coin-glow,
-.balance-card .coin-shadow {
-    display: none !important;
-    opacity: 0 !important;
-    box-shadow: none !important;
-    filter: none !important;
-}
-
-.balance-card .gem {
-    filter: none !important;
-}
-
-.balance-card .coin {
-    box-shadow: none !important;
-    filter: none !important;
+  .balance-divider {
+    height: 58%;
+  }
 }

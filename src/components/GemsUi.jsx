@@ -8,7 +8,7 @@ function GemsUi() {
     <div className="exchange-visual">
       <div className="gem-wrapper1">
         <div className="gem-glow" />
-          <img src={gem} alt="" />
+          <img src={gem} alt="" className="gem-img"/>
         {/* <div className="gem"> */}
           {/* <div className="gem-face gem-top" /> */}
           {/* <div className="gem-face gem-left" /> */}
@@ -25,16 +25,17 @@ function GemsUi() {
       </div>
 
       <div className="coin-wrapper1">
-        <div className="coin-glow" />
+        {/* <div className="coin-glow" /> */}
 {/* 
         <div className="coin">
           <div className="coin-inner">
             <span>VE</span>
           </div>
         </div> */}
+        <div className="coin-glow" />
         <img src={ves} alt="" className="ve-img" />
 
-        <div className="coin-shadow" />
+        {/* <div className="coin-shadow" /> */}
       </div>
     </div>
   );

@@ -1,23 +1,21 @@
 import "../css/balance.css";
 import { Info } from "lucide-react";
-import gem from '../assets/gems.png'
-import ves from '../assets/ves.png'
+import gem from "../assets/gems.png";
+import ves from "../assets/ves.png";
 
-const Balance = () => {
+const Balance = ({ availableGems = 0, availableVEs = 0 }) => {
   return (
     <div className="bal">
       <div className="balance-card">
         <div className="balance-item">
           <div className="balance-icon gem-balance-icon">
-            <div className="gem-wrapper">
-              <img src={gem} alt="gem" />
-            </div>
+            <img src={gem} alt="Gems" />
           </div>
 
           <div className="min">
             <div className="balance-content">
               <p className="avl">Available Gems</p>
-              <h2>420</h2>
+              <h2>{availableGems.toLocaleString()}</h2>
               <span className="balance-label">Gems</span>
             </div>
 
@@ -28,16 +26,14 @@ const Balance = () => {
         <div className="balance-divider" />
 
         <div className="balance-item">
-          <div className="balance-icon">
-            <div className="coin-wrapper">
-              <img src={ves} alt="" />
-            </div>
+          <div className="balance-icon ve-balance-icon">
+            <img src={ves} alt="VEs" />
           </div>
 
           <div className="min">
             <div className="balance-content">
               <p className="avl">Available VEs</p>
-              <h2>3,850</h2>
+              <h2>{availableVEs.toLocaleString()}</h2>
               <span className="balance-label">VEs</span>
             </div>
 

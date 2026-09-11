@@ -3,37 +3,37 @@ import "../css/work.css";
 
 const Work = () => {
   const steps = [
-    {
-      number: "01",
-      title: "Earn Gems",
-      desc: "Complete tasks and watch ads",
-      icon: <Gem />,
-      type: "purple"
-    },
+    // {
+    //   number: "01",
+    //   title: "Earn Gems",
+    //   desc: "Complete tasks and watch ads",
+    //   icon: <Gem />,
+    //   type: "purple"
+    // },
     {
       number: "02",
-      title: "Choose Conversion",
+      title: "Choose",
       desc: "Select a conversion that suits you",
       icon: <Gift />,
       type: "purple"
     },
     {
       number: "03",
-      title: "Review Exchange",
+      title: "Review",
       desc: "Check the details before confirming",
       icon: <FileCheck />,
       type: "purple"
     },
     {
       number: "04",
-      title: "Confirm Conversion",
+      title: "Confirm",
       desc: "Confirm to convert your Gems",
       icon: <ShieldCheck />,
       type: "green"
     },
     {
       number: "05",
-      title: "Receive VEs",
+      title: "Receive",
       desc: "VEs will be added to your balance",
       icon: <Coins />,
       type: "gold"
@@ -50,12 +50,10 @@ const Work = () => {
             <div className={`step-icon ${step.type}`}>
               {step.icon}
             </div>
-
-            <span className="step-number">{step.number}</span>
-
-            <h3>{step.title}</h3>
-
-            <p>{step.desc}</p>
+            <div>
+              <h3>{step.number} {step.title}</h3>
+              <p>{step.desc}</p>
+            </div>
 
             {index < steps.length - 1 && (
               <div className="step-arrow">

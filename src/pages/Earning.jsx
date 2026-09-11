@@ -1,26 +1,23 @@
 import Balance from '../components/Balance'
 import Conversion from '../components/Conversion'
-import ConversionHistory from '../components/ConversionHistory'
 import ExchangeCard from '../components/ExchangeCard'
 import Header from '../components/Header'
 import Info from '../components/Info'
-import Rules from '../components/Rules'
-
 import Work from '../components/Work'
 
 const Earning = () => {
+  const balance = {
+    gems: 420,
+    ves: 3850
+  }
+
   return (
-    <div className='erng'>
+    <div className="erng">
       <Header />
-      <Balance />
+      <Balance availableGems={balance.gems} availableVEs={balance.ves} />
       <ExchangeCard />
       <Work />
       <Conversion />
-      <div className='btm'>
-        <ConversionHistory />
-        <Rules />
-        
-      </div >
       <Info />
     </div>
   )
