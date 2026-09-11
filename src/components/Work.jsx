@@ -11,28 +11,28 @@ const Work = () => {
     //   type: "purple"
     // },
     {
-      number: "02",
+      number: "01",
       title: "Choose",
       desc: "Select a conversion that suits you",
       icon: <Gift />,
       type: "purple"
     },
     {
-      number: "03",
+      number: "02",
       title: "Review",
       desc: "Check the details before confirming",
       icon: <FileCheck />,
       type: "purple"
     },
     {
-      number: "04",
+      number: "03",
       title: "Confirm",
       desc: "Confirm to convert your Gems",
       icon: <ShieldCheck />,
       type: "green"
     },
     {
-      number: "05",
+      number: "04",
       title: "Receive",
       desc: "VEs will be added to your balance",
       icon: <Coins />,
