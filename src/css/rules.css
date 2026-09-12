@@ -188,7 +188,7 @@
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 770px) {
   .rules-card {
     padding: 10px 15px;
   }
@@ -281,7 +281,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .rules-card {
     padding: 13px;
   }

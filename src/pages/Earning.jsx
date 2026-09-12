@@ -14,11 +14,13 @@ const Earning = () => {
   return (
     <div className="erng">
       <Header />
-      <Balance availableGems={balance.gems} availableVEs={balance.ves} />
-      <ExchangeCard />
-      <Work />
-      <Conversion />
-      <Info />
+      <div className='main-cnt'>
+        <Balance availableGems={balance.gems} availableVEs={balance.ves} />
+        <ExchangeCard />
+        <Work />
+        <Conversion />
+        <Info />
+      </div>
     </div>
   )
 }

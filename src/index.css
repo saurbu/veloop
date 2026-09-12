@@ -1,13 +1,43 @@
-body{
+body {
     background-color: #050914;
     text-decoration: white;
 }
-.btm{
+
+.btm {
     display: grid;
     margin: 10px auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-.erng{
+
+.erng {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    min-width: 0;
+}
+
+.main-cnt {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .main-cnt {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-cnt {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-cnt {
+        padding: 0 1px;
+    }
 }

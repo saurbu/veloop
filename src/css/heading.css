@@ -1,6 +1,11 @@
 .exchange-header {
-    padding: 0% 2%;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 6%;
+    box-sizing: border-box;
 }
+
 .exchange-text {
     text-align: left;
 }
@@ -35,20 +40,25 @@
 
 @media (max-width: 991px) {
     .exchange-header {
-        padding-top: 10px;
         width: 100%;
-        margin-left: 20px;
-        padding: 0 10px 1px 5px;
+        max-width: none;
+        margin: 0;
+        padding: 10px 60px 1px 60px;
+        box-sizing: border-box;
     }
+
     .exchange-text {
-        padding-right: 35px;
+        padding-right: 20px;
     }
+
     .exchange-gems {
-        padding-left: 35px;
+        padding-left: 20px;
     }
+
     .p1 {
         font-size: 1.3rem;
     }
+
     .p2 {
         font-size: 0.95rem;
     }
@@ -57,17 +67,20 @@
 @media (max-width: 767px) {
     .exchange-header {
         position: relative;
-        padding-top: 20px;
-        padding-bottom: 0;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 20px 35px 0;
         min-height: 230px;
         overflow: hidden;
+        box-sizing: border-box;
     }
 
     .exchange-text {
         position: relative;
         z-index: 2;
         text-align: left;
-        padding: 0 15px;
+        padding: 0;
     }
 
     .exchange-text .h1 {
@@ -112,16 +125,20 @@
 
 @media (max-width: 480px) {
     .exchange-header {
-        padding-top: 18px;
-        padding-left: 10px;
-        min-height: 195px;
         width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 18px 20px 0;
+        min-height: 195px;
+        box-sizing: border-box;
     }
-    .container{
+
+    .container {
         max-height: 200px;
     }
+
     .exchange-text {
-        padding: 0 15px;
+        padding: 0 5px;
         text-align: left;
     }
 

@@ -456,17 +456,22 @@
 
 @media (max-width: 991px) {
     .exchange-visual {
-        width: 100%;
-        max-width: 100%;
+        width: 90%;
         height: 230px;
-        gap: 35px;
+        gap: 25px;
         border: none;
         box-shadow: none;
         border-radius: 18px;
     }
+     .coin-wrapper1 .ve-img{
+      width: 120px;
+    }
+    .gem-wrapper1 img{
+      width: 100px;
+    }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 770px) {
     .exchange-visual {
         width: 100vw;
         max-width: none;
@@ -509,7 +514,7 @@
         width: 43px;
     }
 }
-@media (max-width: 767px) {
+@media (max-width: 770px) {
   .exchange-visual {
     width: 100%;
     max-width: none;
@@ -544,7 +549,7 @@
       width: 140px;
     }
 }
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     .exchange-visual {
         width: 100vw;
         max-width: none;

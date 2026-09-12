@@ -581,7 +581,7 @@
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 770px) {
   .btm {
     width: 92%;
     grid-template-columns: 1fr;
@@ -747,7 +747,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .btm {
     width: 94%;
     margin: 20px auto;

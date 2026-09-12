@@ -559,7 +559,10 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 770px) {
+  .container-card{
+    width: 80%;
+  }
   .con {
     padding: 16px 25px 25px;
   }
@@ -675,7 +678,12 @@
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 480px) {
+  .container-card {
+    width: 80%;
+    max-width: 1180px;
+    margin: 10px auto;
+  }
   .con {
     padding: 13px 8px 0px;
   }

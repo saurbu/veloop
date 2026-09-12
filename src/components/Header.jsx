@@ -5,7 +5,6 @@ const Header = () => {
   return (
     <div className="container text-center exchange-header">
       <div className="row align-items-center">
-
         <div className="col-md-6 exchange-text">
           <h1 className="h1">Exchange Center</h1>
 
@@ -23,7 +22,6 @@ const Header = () => {
         <div className="col-md-6 exchange-gems">
           <GemsUi />
         </div>
-
       </div>
     </div>
   );

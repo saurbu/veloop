@@ -1,4 +1,4 @@
-import { Gem, Gift, FileCheck, ShieldCheck, Coins } from "lucide-react";
+import { Gift, FileCheck, ShieldCheck, Coins } from "lucide-react";
 import "../css/work.css";
 
 const Work = () => {
