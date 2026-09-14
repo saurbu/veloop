@@ -1,9 +1,12 @@
 import "../css/balance.css";
-import { Info } from "lucide-react";
+import { ChevronRight, Crown } from "lucide-react";
 import gem from "../assets/gems.png";
 import ves from "../assets/ves.png";
 
 const Balance = ({ availableGems = 0, availableVEs = 0 }) => {
+  const nextReward = 20;
+  const progress = Math.min((availableGems / nextReward) * 100, 100);
+
   return (
     <div className="bal">
       <div className="balance-card">
@@ -12,32 +15,48 @@ const Balance = ({ availableGems = 0, availableVEs = 0 }) => {
             <img src={gem} alt="Gems" />
           </div>
 
-          <div className="min">
-            <div className="balance-content">
-              <p className="avl">Available Gems</p>
-              <h2>{availableGems.toLocaleString()}</h2>
-              <span className="balance-label">Gems</span>
+          <div className="balance-content">
+            <span className="balance-title">Your Gems</span>
+            <div className="balance-value-row">
+              <strong>{availableGems.toLocaleString()}</strong>
+              <ChevronRight />
             </div>
-
-            <Info className="balance-info" />
           </div>
         </div>
 
-        <div className="balance-divider" />
+        <div className="balance-divider"></div>
 
         <div className="balance-item">
           <div className="balance-icon ve-balance-icon">
             <img src={ves} alt="VEs" />
           </div>
 
-          <div className="min">
-            <div className="balance-content">
-              <p className="avl">Available VEs</p>
-              <h2>{availableVEs.toLocaleString()}</h2>
-              <span className="balance-label">VEs</span>
+          <div className="balance-content">
+            <span className="balance-title">Your VEs</span>
+            <div className="balance-value-row">
+              <strong>{availableVEs.toLocaleString()}</strong>
+              <ChevronRight />
             </div>
+          </div>
+        </div>
 
-            <Info className="balance-info" />
+        <div className="balance-divider"></div>
+
+        <div className="next-reward">
+          <div className="reward-icon">
+            <Crown />
+          </div>
+
+          <div className="reward-content">
+            <span>Next Reward</span>
+            <strong>{Math.max(nextReward - availableGems, 0)} Gems away</strong>
+
+            <div className="reward-progress">
+              <div
+                className="reward-progress-fill"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
           </div>
         </div>
       </div>

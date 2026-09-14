@@ -1,43 +1,536 @@
 body {
-    background-color: #050914;
-    text-decoration: white;
+    margin: 0;
+    min-height: 100vh;
+    color: #ffffff;
+    background: #02030a;
+    overflow-x: hidden;
+}
+
+.earning-page {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(91, 33, 182, 0.22),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #010207 0%,
+            #030611 35%,
+            #080313 68%,
+            #02040b 100%
+        );
+}
+
+.earning-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background:
+        radial-gradient(
+            ellipse at 15% 25%,
+            rgba(37, 99, 235, 0.12),
+            transparent 32%
+        ),
+        radial-gradient(
+            ellipse at 85% 40%,
+            rgba(147, 51, 234, 0.14),
+            transparent 35%
+        );
+}
+
+.earning-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.8;
+    background:
+        linear-gradient(
+            145deg,
+            transparent 0%,
+            rgba(124, 58, 237, 0.035) 35%,
+            transparent 50%
+        ),
+        linear-gradient(
+            35deg,
+            transparent 20%,
+            rgba(59, 130, 246, 0.035) 48%,
+            transparent 65%
+        );
+}
+
+.earning-bg::after {
+    content: "";
+    position: absolute;
+    width: 750px;
+    height: 750px;
+    top: -520px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(139, 92, 246, 0.32) 0%,
+            rgba(124, 58, 237, 0.15) 32%,
+            transparent 70%
+        );
+    filter: blur(30px);
+}
+
+.earning-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(90px);
+}
+
+.glow-purple {
+    width: 480px;
+    height: 480px;
+    top: -180px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(124, 58, 237, 0.2);
+}
+
+.glow-blue {
+    width: 420px;
+    height: 420px;
+    left: -260px;
+    top: 25%;
+    background: rgba(37, 99, 235, 0.16);
+}
+
+.glow-violet {
+    width: 480px;
+    height: 480px;
+    right: -280px;
+    top: 42%;
+    background: rgba(168, 45, 255, 0.18);
+}
+
+.earning-crystal {
+    position: absolute;
+    width: 170px;
+    height: 260px;
+    opacity: 0.95;
+    transform-style: preserve-3d;
+    filter:
+        drop-shadow(0 0 8px rgba(168, 85, 247, 0.8))
+        drop-shadow(0 0 28px rgba(124, 58, 237, 0.45));
+}
+
+.earning-crystal span {
+    position: absolute;
+    inset: 0;
+}
+
+.earning-crystal span:nth-child(1) {
+    clip-path: polygon(
+        50% 0%,
+        100% 23%,
+        50% 52%,
+        0% 23%
+    );
+    background:
+        linear-gradient(
+            145deg,
+            #f5eaff 0%,
+            #d8b4fe 20%,
+            #33055e 48%,
+            #6d28d9 75%,
+            #2e1065 100%
+        );
+}
+
+.earning-crystal span:nth-child(2) {
+    clip-path: polygon(
+        0% 23%,
+        50% 52%,
+        50% 100%,
+        18% 78%
+    );
+    background:
+        linear-gradient(
+            135deg,
+            #c084fc 0%,
+            #9333ea 30%,
+            #6d28d9 58%,
+            #3b0764 100%
+        );
+}
+
+.earning-crystal span:nth-child(3) {
+    clip-path: polygon(
+        100% 23%,
+        50% 52%,
+        50% 100%,
+        82% 78%
+    );
+    background:
+        linear-gradient(
+            225deg,
+            #e9d5ff 0%,
+            #a855f7 25%,
+            #7c3aed 50%,
+            #4c1d95 75%,
+            #1e0a3c 100%
+        );
+}
+
+.earning-crystal::before {
+    content: "";
+    position: absolute;
+    inset: 8% 20%;
+    z-index: 5;
+    clip-path: polygon(
+        50% 0%,
+        100% 40%,
+        50% 100%,
+        0% 40%
+    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.55),
+            rgba(255, 255, 255, 0.08) 45%,
+            transparent 70%
+        );
+    opacity: 0.5;
+}
+
+.earning-crystal::after {
+    content: "";
+    position: absolute;
+    width: 45%;
+    height: 100%;
+    left: 28%;
+    top: 0;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.12),
+            transparent
+        );
+    transform: skewX(-12deg);
+    opacity: 0.45;
+}
+
+.crystal-left-top {
+    left: -65px;
+    top: 10%;
+    transform: rotate(25deg) scale(1.05);
+}
+
+.crystal-right-top {
+    right: -85px;
+    top: 17%;
+    transform: rotate(-27deg) scale(0.8);
+}
+
+.crystal-left-bottom {
+    left: -90px;
+    bottom: 7%;
+    transform: rotate(-20deg) scale(0.8);
+}
+
+.crystal-right-bottom {
+    right: -65px;
+    bottom: 5%;
+    transform: rotate(23deg) scale(1);
+}
+
+.crystal-right-top,
+.crystal-right-bottom {
+    filter:
+        drop-shadow(0 0 8px rgba(96, 165, 250, 0.8))
+        drop-shadow(0 0 25px rgba(59, 130, 246, 0.45));
+}
+
+.crystal-right-top span:nth-child(1),
+.crystal-right-bottom span:nth-child(1) {
+    background:
+        linear-gradient(
+            145deg,
+            #e0f2fe 0%,
+            #93c5fd 20%,
+            #6366f1 48%,
+            #4c1d95 75%,
+            #1e0b3f 100%
+        );
+}
+
+.crystal-right-top span:nth-child(2),
+.crystal-right-bottom span:nth-child(2) {
+    background:
+        linear-gradient(
+            135deg,
+            #60a5fa 0%,
+            #6366f1 35%,
+            #4f46e5 65%,
+            #24104d 100%
+        );
+}
+
+.crystal-right-top span:nth-child(3),
+.crystal-right-bottom span:nth-child(3) {
+    background:
+        linear-gradient(
+            225deg,
+            #bfdbfe 0%,
+            #818cf8 30%,
+            #6366f1 55%,
+            #312e81 80%,
+            #170b35 100%
+        );
+}
+
+.earning-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ddd6fe;
+    box-shadow:
+        0 0 5px rgba(196, 181, 253, 0.9),
+        0 0 14px rgba(139, 92, 246, 0.8);
+    animation: particleFloat 5s ease-in-out infinite alternate;
+}
+
+.particle-one {
+    left: 15%;
+    top: 20%;
+}
+
+.particle-two {
+    left: 82%;
+    top: 25%;
+    animation-delay: 1s;
+}
+
+.particle-three {
+    left: 9%;
+    top: 48%;
+    animation-delay: 2s;
+}
+
+.particle-four {
+    left: 91%;
+    top: 52%;
+    animation-delay: 0.5s;
+}
+
+.particle-five {
+    left: 18%;
+    top: 72%;
+    animation-delay: 1.5s;
+}
+
+.particle-six {
+    left: 78%;
+    top: 76%;
+    animation-delay: 2.5s;
+}
+
+.particle-seven {
+    left: 43%;
+    top: 85%;
+    animation-delay: 3s;
+}
+
+.particle-eight {
+    left: 58%;
+    top: 32%;
+    animation-delay: 1.8s;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) scale(0.7);
+        opacity: 0.25;
+    }
+
+    100% {
+        transform: translateY(-18px) scale(1.4);
+        opacity: 1;
+    }
+}
+
+.main-cnt {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 60px;
+    box-sizing: border-box;
+}
+
+.earning-content {
+    width: 100%;
 }
 
 .btm {
     display: grid;
-    margin: 10px auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.erng {
-    display: flex;
-    flex-direction: column;
+    gap: 20px;
     width: 100%;
-    min-width: 0;
+    margin: 18px 0;
 }
 
-.main-cnt {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 40px;
-    box-sizing: border-box;
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1100px) {
     .main-cnt {
-        padding: 0 30px;
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+}
+
+@media (max-width: 900px) {
+    .btm {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .earning-crystal {
+        opacity: 0.7;
+    }
+
+    .crystal-left-top {
+        left: -90px;
+        transform: rotate(25deg) scale(0.75);
+    }
+
+    .crystal-right-top {
+        right: -105px;
+        transform: rotate(-27deg) scale(0.65);
+    }
+
+    .crystal-left-bottom {
+        left: -105px;
+        transform: rotate(-20deg) scale(0.65);
+    }
+
+    .crystal-right-bottom {
+        right: -90px;
+        transform: rotate(23deg) scale(0.75);
     }
 }
 
 @media (max-width: 768px) {
     .main-cnt {
-        padding: 0 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .earning-bg::after {
+        width: 500px;
+        height: 500px;
+        top: -280px;
+    }
+
+    .glow-purple {
+        width: 400px;
+        height: 400px;
+    }
+
+    .glow-blue {
+        width: 380px;
+        height: 380px;
+        left: -260px;
+    }
+
+    .glow-violet {
+        width: 400px;
+        height: 400px;
+        right: -270px;
+    }
+}
+
+@media (max-width: 600px) {
+    .earning-crystal {
+        opacity: 0.5;
+    }
+
+    .crystal-left-top {
+        left: -105px;
+        top: 13%;
+        transform: rotate(25deg) scale(0.58);
+    }
+
+    .crystal-right-top {
+        right: -115px;
+        top: 20%;
+        transform: rotate(-27deg) scale(0.5);
+    }
+
+    .crystal-left-bottom {
+        left: -115px;
+        bottom: 12%;
+        transform: rotate(-20deg) scale(0.5);
+    }
+
+    .crystal-right-bottom {
+        right: -105px;
+        bottom: 8%;
+        transform: rotate(23deg) scale(0.58);
+    }
+
+    .earning-bg::after {
+        width: 380px;
+        height: 380px;
+        top: -200px;
+    }
+
+    .glow-purple {
+        width: 350px;
+        height: 350px;
+    }
+
+    .glow-blue {
+        width: 300px;
+        height: 300px;
+    }
+
+    .glow-violet {
+        width: 320px;
+        height: 320px;
     }
 }
 
 @media (max-width: 480px) {
     .main-cnt {
-        padding: 0 1px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .earning-crystal {
+        opacity: 0.4;
+    }
+
+    .crystal-left-top {
+        left: -120px;
+    }
+
+    .crystal-right-top {
+        right: -125px;
+    }
+
+    .crystal-left-bottom {
+        left: -125px;
+    }
+
+    .crystal-right-bottom {
+        right: -115px;
     }
 }

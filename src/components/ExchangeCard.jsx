@@ -2,16 +2,15 @@ import { useState } from "react";
 import {
   ArrowRight,
   ArrowLeftRight,
-  Info,
   X,
   CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 import "../css/ExchangeCard.css";
 
-const GEM_TO_VE = 5.39;
-const MAX_GEMS = 1000;
 
-const ExchangeCard = () => {
+
+const ExchangeCard = ({availableGems = 0}) => {
   const [amount, setAmount] = useState("");
   const [swapped, setSwapped] = useState(false);
   const [preview, setPreview] = useState(false);
@@ -19,13 +18,22 @@ const ExchangeCard = () => {
   const [converted, setConverted] = useState(false);
 
   const numericAmount = Number(amount);
-
+  const GEM_TO_VE = 5.39;
+  const MAX_GEMS = availableGems;
+  const MIN_GEMS = 20;
   const outputAmount =
     amount !== "" && !isNaN(numericAmount) && numericAmount > 0
       ? swapped
         ? (numericAmount / GEM_TO_VE).toFixed(2)
         : (numericAmount * GEM_TO_VE).toFixed(2)
       : "0";
+
+  const isEmpty = amount === "" || isNaN(numericAmount) || numericAmount <= 0;
+  const isBelowMinimum =
+    !swapped && numericAmount > 0 && numericAmount < MIN_GEMS;
+  const canConvert = !swapped
+    ? numericAmount >= MIN_GEMS
+    : numericAmount >= MIN_GEMS * GEM_TO_VE;
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
@@ -47,7 +55,6 @@ const ExchangeCard = () => {
   const handleMax = () => {
     if (swapped) {
       const maxVE = (MAX_GEMS * GEM_TO_VE).toFixed(2);
-
       setAmount(maxVE);
     } else {
       setAmount(MAX_GEMS.toString());
@@ -74,11 +81,7 @@ const ExchangeCard = () => {
   };
 
   const handlePreview = () => {
-    if (
-      amount === "" ||
-      isNaN(Number(amount)) ||
-      Number(amount) <= 0
-    ) {
+    if (isEmpty) {
       return;
     }
 
@@ -87,22 +90,20 @@ const ExchangeCard = () => {
   };
 
   const handleConvertClick = () => {
+    if (!canConvert) {
+      return;
+    }
+
     setShowConfirm(true);
   };
 
   const handleConfirmConversion = () => {
+    if (!canConvert) {
+      return;
+    }
+
     setShowConfirm(false);
     setConverted(true);
-
-    // backend
-    // await fetch("/api/convert", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     amount,
-    //     from: swapped ? "VE" : "GEMS",
-    //     to: swapped ? "GEMS" : "VE",
-    //   }),
-    // });
 
     setTimeout(() => {
       setAmount("");
@@ -119,104 +120,118 @@ const ExchangeCard = () => {
     <>
       <div className="exchange-wrapper">
         <div className="exchange-card">
+          <div className="exchange-heading">
+            <div>
+              <span className="exchange-eyebrow">EXCHANGE CENTER</span>
+              <h3 className="exchange-title">
+                Convert your {swapped ? "VEs" : "Gems"}
+              </h3>
+            </div>
 
-          <h3 className="exchange-title">
-            Enter {swapped ? "VE" : "Gems"} Amount
-          </h3>
+            <div className="exchange-status">
+              <span></span>
+              Live Rate | 
+              <div className="exchange-rate">
+              1 Gem = {GEM_TO_VE} VEs
+            </div>
+            </div>
+          </div>
 
           <div className="exchange-row">
             <div className="exchange-box gems-box">
-              <div className="gem-icon">
-                💎
-              </div>
-              <div className="amount-content">
+              <div className="exchange-box-top">
+                <span className="box-label">
+                  {swapped ? "VEs" : "Gems"}
+                </span>
 
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  value={amount}
-                  onChange={handleAmountChange}
-                  placeholder="0"
-                  className="amount-input"
-                  aria-label={
-                    swapped
-                      ? "VE amount"
-                      : "Gems amount"
-                  }
-                />
-
-                <div className="amount-label">
-                  {swapped
-                    ? "VEs to convert"
-                    : "Gems to convert"}
-                </div>
-
+                <span className="box-type">
+                  {swapped ? "SOURCE" : "SOURCE"}
+                </span>
               </div>
 
-              {!swapped && (
-                <button
-                  type="button"
-                  className="max-btn"
-                  onClick={handleMax}
-                >
-                  MAX
-                </button>
-              )}
-
-              {swapped && (
-                <div className="input-currency">
-                  VE
+              <div className="exchange-input-row">
+                <div className={`gem-icon ${swapped ? "ve-source-icon" : ""}`}>
+                  {swapped ? <span className="ve-coin">VE</span> : "💎"}
                 </div>
-              )}
 
+                <div className="amount-content">
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={amount}
+                    onChange={handleAmountChange}
+                    placeholder="0"
+                    className="amount-input"
+                    aria-label={swapped ? "VE amount" : "Gems amount"}
+                  />
+
+                  <div className="amount-label">
+                    {swapped ? "VEs to convert" : "Gems to convert"}
+                  </div>
+                </div>
+
+                {!swapped && (
+                  <button
+                    type="button"
+                    className="max-btn"
+                    onClick={handleMax}
+                  >
+                    MAX
+                  </button>
+                )}
+
+                {swapped && (
+                  <span className="input-currency">
+                    VE
+                  </span>
+                )}
+              </div>
             </div>
 
             <button
               type="button"
-              className={`swap-button ${
-                swapped ? "is-swapped" : ""
-              }`}
+              className={`swap-button ${swapped ? "is-swapped" : ""}`}
               onClick={handleSwap}
               aria-label="Swap conversion"
             >
               <ArrowLeftRight
-                size={25}
+                size={22}
                 strokeWidth={1.8}
               />
             </button>
 
             <div className="exchange-box ve-box">
+              <div className="exchange-box-top">
+                <span className="box-label">
+                  {swapped ? "Gems" : "VEs"}
+                </span>
 
-              <div className="amount-content">
-
-                <div
-                  className={`amount-output ${
-                    swapped
-                      ? "output-purple"
-                      : ""
-                  }`}
-                >
-                  {outputAmount}
-                </div>
-
-                <div className="amount-label">
-                  {swapped
-                    ? "Gems you will receive"
-                    : "VE(s) you will receive"}
-                </div>
-
+                <span className="box-type">
+                  RECEIVE
+                </span>
               </div>
 
-              <div
-                className={`ve-icon ${
-                  swapped
-                    ? "gem-output-icon"
-                    : ""
-                }`}
-              >
-                {swapped ? "💎" : "VE"}
-              </div>
+              <div className="exchange-input-row">
+                <div className="amount-content">
+                  <div
+                    className={`amount-output ${
+                      swapped ? "output-purple" : ""
+                    }`}
+                  >
+                    {outputAmount}
+                  </div>
 
+                  <div className="amount-label">
+                    {swapped
+                      ? "Gems you will receive"
+                      : "VEs you will receive"}
+                  </div>
+                </div>
+
+                <div className={`ve-icon ${swapped ? "gem-output-icon" : ""}`}>
+                  {swapped ? "💎" : <span className="ve-coin">VE</span>}
+                </div>
+              </div>
             </div>
 
             <button
@@ -225,86 +240,84 @@ const ExchangeCard = () => {
               onClick={handlePreview}
             >
               <span>Preview Conversion</span>
-
-              <ArrowRight
-                size={22}
-                strokeWidth={2}
-              />
+              <ArrowRight size={18} strokeWidth={2} />
             </button>
-
           </div>
 
-          <div className="exchange-rate">
+          {/* <div className="exchange-footer">
+            
 
-            <span className="rate-icon">
-              ♙
-            </span>
-
-            <span>
-              1 Gem = {GEM_TO_VE} VEs
-            </span>
-
-            <Info size={16} />
-
-          </div>
+            <div className="minimum-rate">
+              Minimum conversion: {MIN_GEMS} Gems
+            </div>
+          </div> */}
 
           {preview && (
             <div className="conversion-preview">
-
-              <div className="preview-info">
-
-                <span>
-                  You are converting
-                </span>
-
-                <strong>
-                  {amount}{" "}
-                  {swapped ? "VEs" : "Gems"}
-                </strong>
-
+              <div className="preview-header">
+                <span>Conversion Preview</span>
+                {isBelowMinimum && (
+                  <span className="preview-warning-label">
+                    Below minimum
+                  </span>
+                )}
               </div>
 
-              <ArrowRight
-                size={18}
-                className="preview-arrow"
-              />
+              <div className="preview-main">
+                <div className="preview-info">
+                  <span>You are converting</span>
+                  <strong>
+                    {amount} {swapped ? "VEs" : "Gems"}
+                  </strong>
+                </div>
 
-              <div className="preview-info">
+                <div className="preview-arrow-wrap">
+                  <ArrowRight
+                    size={17}
+                    className="preview-arrow"
+                  />
+                </div>
 
-                <span>
-                  You will receive
-                </span>
-
-                <strong className="preview-ve">
-                  {outputAmount}{" "}
-                  {swapped ? "Gems" : "VEs"}
-                </strong>
-
+                <div className="preview-info">
+                  <span>You will receive</span>
+                  <strong className="preview-ve">
+                    {outputAmount} {swapped ? "Gems" : "VEs"}
+                  </strong>
+                </div>
               </div>
 
-              {/* Convert button */}
+              {isBelowMinimum && (
+                <div className="minimum-warning">
+                  <AlertCircle size={15} />
+                  <span>
+                    Minimum conversion is {MIN_GEMS} Gems
+                  </span>
+                </div>
+              )}
+
               <button
                 type="button"
-                className="convert-btn"
+                className={`convert-btn ${
+                  !canConvert ? "convert-btn-disabled" : ""
+                }`}
+                disabled={!canConvert}
                 onClick={handleConvertClick}
               >
-                Convert
+                {isBelowMinimum
+                  ? `Minimum ${MIN_GEMS} Gems`
+                  : "Convert"}
               </button>
-
             </div>
           )}
 
-
           {converted && (
             <div className="conversion-success">
-              <CheckCircle size={18} />
-
+              <CheckCircle size={17} />
               <span>
                 Conversion completed successfully!
               </span>
             </div>
           )}
-
         </div>
       </div>
 
@@ -313,75 +326,58 @@ const ExchangeCard = () => {
           className="confirmation-overlay"
           onClick={handleCancelConversion}
         >
-
           <div
             className="confirmation-modal"
             onClick={(e) => e.stopPropagation()}
           >
-
             <button
               type="button"
               className="modal-close"
               onClick={handleCancelConversion}
               aria-label="Close"
             >
-              <X size={20} />
+              <X size={19} />
             </button>
 
             <div className="confirm-icon">
-              <ArrowLeftRight size={25} />
+              <ArrowLeftRight size={24} />
             </div>
 
-            <h3>
-              Confirm Conversion
-            </h3>
+            <h3>Confirm Conversion</h3>
 
             <p className="confirm-text">
-              Are you sure you want to convert?
+              Review your conversion before continuing.
             </p>
 
             <div className="confirm-details">
-
               <div className="confirm-amount">
-                <span>
-                  You convert
-                </span>
-
+                <span>You convert</span>
                 <strong>
-                  {amount}{" "}
-                  {swapped ? "VEs" : "Gems"}
+                  {amount} {swapped ? "VEs" : "Gems"}
                 </strong>
               </div>
 
-              <ArrowRight size={20} />
+              <ArrowRight size={19} />
 
               <div className="confirm-amount">
-                <span>
-                  You receive
-                </span>
-
+                <span>You receive</span>
                 <strong className="confirm-output">
-                  {outputAmount}{" "}
-                  {swapped ? "Gems" : "VEs"}
+                  {outputAmount} {swapped ? "Gems" : "VEs"}
                 </strong>
               </div>
-
             </div>
 
-            {/* Rate */}
             <div className="confirm-rate">
               Rate: 1 Gem = {GEM_TO_VE} VEs
             </div>
 
-            {/* Buttons */}
             <div className="confirmation-actions">
-
               <button
                 type="button"
                 className="cancel-btn"
                 onClick={handleCancelConversion}
               >
-                No
+                Cancel
               </button>
 
               <button
@@ -391,11 +387,8 @@ const ExchangeCard = () => {
               >
                 Yes, Convert
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
     </>
