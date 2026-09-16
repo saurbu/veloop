@@ -708,7 +708,7 @@
     color: #fff;
 }
 
-.ad-overlay {
+.reward-overlay {
     position: fixed !important;
     inset: 0 !important;
     width: 100vw !important;
@@ -723,10 +723,10 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     pointer-events: auto !important;
-    animation: adFadeIn 0.25s ease;
+    animation: rewardFadeIn 0.25s ease;
 }
 
-.ad-container {
+.reward-container {
     position: relative !important;
     z-index: 10 !important;
     width: 80vw !important;
@@ -752,7 +752,7 @@
         0 0 80px rgba(102, 56, 214, 0.15) !important;
 }
 
-.ad-close {
+.reward-close {
     position: absolute !important;
     top: 13px !important;
     right: 13px !important;
@@ -775,14 +775,14 @@
         transform 0.2s ease;
 }
 
-.ad-close:hover {
+.reward-close:hover {
     background: rgba(255, 255, 255, 0.1) !important;
     border-color: rgba(255, 255, 255, 0.42) !important;
     color: #fff !important;
     transform: scale(1.05);
 }
 
-.ad-header {
+.reward-header {
     width: 100%;
     min-height: 58px;
     flex-shrink: 0;
@@ -798,7 +798,7 @@
     z-index: 20;
 }
 
-.ad-title {
+.reward-title {
     display: flex;
     align-items: center;
     gap: 9px;
@@ -808,12 +808,12 @@
     white-space: nowrap;
 }
 
-.ad-title svg {
+.reward-title svg {
     color: #9b7cff;
     flex-shrink: 0;
 }
 
-.ad-sponsored {
+.reward-sponsored {
     color: #646c80;
     font-size: 8px;
     font-weight: 700;
@@ -821,7 +821,7 @@
     white-space: nowrap;
 }
 
-.ad-content {
+.reward-content {
     flex: 1;
     min-height: 0;
     display: flex;
@@ -832,7 +832,7 @@
     text-align: center;
 }
 
-.ad-logo {
+.reward-logo {
     position: relative;
     width: 110px;
     height: 110px;
@@ -842,7 +842,7 @@
     margin-bottom: 22px;
 }
 
-.ad-logo-center {
+.reward-logo-center {
     position: relative;
     z-index: 3;
     width: 64px;
@@ -861,36 +861,36 @@
     box-shadow:
         0 0 40px rgba(127, 59, 229, 0.28),
         inset 0 1px 0 rgba(255, 255, 255, 0.13);
-    animation: adIconPulse 2s ease-in-out infinite;
+    animation: rewardIconPulse 2s ease-in-out infinite;
 }
 
-.ad-ring {
+.reward-ring {
     position: absolute;
     border: 1px solid rgba(158, 104, 255, 0.25);
     border-radius: 50%;
 }
 
-.ring-one {
+.reward-ring-one {
     width: 105px;
     height: 58px;
     transform: rotate(30deg);
-    animation: ringRotate 4s linear infinite;
+    animation: rewardRingRotate 4s linear infinite;
 }
 
-.ring-two {
+.reward-ring-two {
     width: 58px;
     height: 105px;
     transform: rotate(-30deg);
-    animation: ringRotateReverse 4s linear infinite;
+    animation: rewardRingRotateReverse 4s linear infinite;
 }
 
-.ad-content h2 {
+.reward-content h2 {
     margin: 8px 0 0;
     color: #f2f3fa;
     font-size: clamp(22px, 3vw, 38px);
 }
 
-.ad-content p {
+.reward-content p {
     width: min(450px, 90%);
     margin: 10px 0 24px;
     color: #8d96ab;
@@ -898,7 +898,7 @@
     line-height: 1.7;
 }
 
-.ad-loader {
+.reward-loader {
     width: min(350px, 80%);
     height: 4px;
     overflow: hidden;
@@ -906,7 +906,7 @@
     background: rgba(255, 255, 255, 0.08);
 }
 
-.ad-loader-fill {
+.reward-loader-fill {
     height: 100%;
     border-radius: inherit;
     background: linear-gradient(90deg, #7037d1, #b477ff);
@@ -914,13 +914,13 @@
     transition: width 0.2s linear;
 }
 
-.ad-message {
+.reward-message {
     margin-top: 9px;
     color: #626b80;
     font-size: 9px;
 }
 
-.ad-bottom {
+.reward-bottom {
     height: 54px;
     flex-shrink: 0;
     display: flex;
@@ -933,20 +933,20 @@
     font-size: 8px;
 }
 
-.ad-bottom-left {
+.reward-bottom-left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.ad-bottom-right {
+.reward-bottom-right {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     min-width: 115px;
 }
 
-.ad-countdown {
+.reward-countdown {
     min-width: 105px;
     height: 34px;
     padding: 0 11px;
@@ -964,12 +964,12 @@
     flex-shrink: 0;
 }
 
-.ad-countdown strong {
+.reward-countdown strong {
     color: #d6c8ff;
     font-size: 13px;
 }
 
-.ad-skip {
+.reward-skip {
     min-width: 100px;
     height: 35px;
     padding: 0 12px;
@@ -988,24 +988,24 @@
     pointer-events: auto;
     position: relative;
     z-index: 100;
-    animation: skipAppear 0.3s ease;
+    animation: rewardSkipAppear 0.3s ease;
     transition:
         background 0.2s ease,
         border-color 0.2s ease,
         transform 0.2s ease;
 }
 
-.ad-skip:hover {
+.reward-skip:hover {
     background: rgba(255, 255, 255, 0.16);
     border-color: rgba(255, 255, 255, 0.55);
     transform: translateY(-1px);
 }
 
-.ad-skip:active {
+.reward-skip:active {
     transform: translateY(0);
 }
 
-.ad-collect {
+.reward-collect {
     min-width: 135px;
     height: 35px;
     padding: 0 13px;
@@ -1028,7 +1028,7 @@
     cursor: pointer;
     position: relative;
     z-index: 100;
-    animation: collectAppear 0.35s ease;
+    animation: rewardCollectAppear 0.35s ease;
     box-shadow:
         0 0 18px rgba(39, 207, 126, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.14);
@@ -1039,7 +1039,7 @@
         box-shadow 0.2s ease;
 }
 
-.ad-collect:hover {
+.reward-collect:hover {
     background: linear-gradient(
         135deg,
         rgba(39, 196, 119, 1),
@@ -1052,7 +1052,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-.ad-collect:active {
+.reward-collect:active {
     transform: translateY(0);
 }
 
@@ -1157,7 +1157,7 @@
     }
 }
 
-@keyframes adFadeIn {
+@keyframes rewardFadeIn {
     from {
         opacity: 0;
     }
@@ -1167,7 +1167,7 @@
     }
 }
 
-@keyframes adIconPulse {
+@keyframes rewardIconPulse {
     0%,
     100% {
         transform: scale(1);
@@ -1178,7 +1178,7 @@
     }
 }
 
-@keyframes ringRotate {
+@keyframes rewardRingRotate {
     from {
         transform: rotate(30deg);
     }
@@ -1188,7 +1188,7 @@
     }
 }
 
-@keyframes ringRotateReverse {
+@keyframes rewardRingRotateReverse {
     from {
         transform: rotate(-30deg);
     }
@@ -1198,7 +1198,7 @@
     }
 }
 
-@keyframes skipAppear {
+@keyframes rewardSkipAppear {
     from {
         opacity: 0;
         transform: translateY(-5px);
@@ -1210,7 +1210,7 @@
     }
 }
 
-@keyframes collectAppear {
+@keyframes rewardCollectAppear {
     from {
         opacity: 0;
         transform: translateY(5px) scale(0.96);
@@ -1344,43 +1344,43 @@
         font-size: 9px;
     }
 
-    .ad-header {
+    .reward-header {
         min-height: 52px;
         padding: 0 58px 0 14px;
     }
 
-    .ad-title {
+    .reward-title {
         font-size: 12px;
     }
 
-    .ad-sponsored {
+    .reward-sponsored {
         font-size: 7px;
     }
 
-    .ad-close {
+    .reward-close {
         top: 9px !important;
         right: 9px !important;
         width: 34px !important;
         height: 34px !important;
     }
 
-    .ad-countdown {
+    .reward-countdown {
         min-width: 90px;
         height: 32px;
         font-size: 9px;
     }
 
-    .ad-countdown strong {
+    .reward-countdown strong {
         font-size: 11px;
     }
 
-    .ad-skip {
+    .reward-skip {
         min-width: 90px;
         height: 32px;
         font-size: 10px;
     }
 
-    .ad-collect {
+    .reward-collect {
         min-width: 120px;
         height: 32px;
         font-size: 10px;
@@ -1478,131 +1478,131 @@
         padding: 0 6px;
     }
 
-    .ad-overlay {
+    .reward-overlay {
         padding: 10px !important;
     }
 
-    .ad-container {
+    .reward-container {
         width: 92vw !important;
         height: 82vh !important;
         min-height: 360px !important;
         border-radius: 13px !important;
     }
 
-    .ad-header {
+    .reward-header {
         min-height: 48px;
         padding: 0 52px 0 10px;
     }
 
-    .ad-title {
+    .reward-title {
         font-size: 10px;
         gap: 5px;
     }
 
-    .ad-title svg {
+    .reward-title svg {
         width: 14px;
         height: 14px;
     }
 
-    .ad-sponsored {
+    .reward-sponsored {
         display: none;
     }
 
-    .ad-close {
+    .reward-close {
         top: 7px !important;
         right: 7px !important;
         width: 31px !important;
         height: 31px !important;
     }
 
-    .ad-close svg {
+    .reward-close svg {
         width: 16px;
         height: 16px;
     }
 
-    .ad-countdown {
+    .reward-countdown {
         min-width: 78px;
         height: 29px;
         padding: 0 7px;
         font-size: 8px;
     }
 
-    .ad-countdown strong {
+    .reward-countdown strong {
         font-size: 10px;
     }
 
-    .ad-skip {
+    .reward-skip {
         min-width: 78px;
         height: 29px;
         padding: 0 7px;
         font-size: 9px;
     }
 
-    .ad-collect {
+    .reward-collect {
         min-width: 112px;
         height: 29px;
         padding: 0 8px;
         font-size: 8px;
     }
 
-    .ad-collect svg {
+    .reward-collect svg {
         width: 13px;
         height: 13px;
     }
 
-    .ad-content {
+    .reward-content {
         padding: 18px;
     }
 
-    .ad-logo {
+    .reward-logo {
         transform: scale(0.8);
         margin-bottom: 5px;
     }
 
-    .ad-content h2 {
+    .reward-content h2 {
         font-size: 23px;
     }
 
-    .ad-content p {
+    .reward-content p {
         font-size: 10px;
     }
 
-    .ad-bottom {
+    .reward-bottom {
         height: 42px;
         padding: 0 12px;
     }
 
-    .ad-bottom-left {
+    .reward-bottom-left {
         gap: 7px;
     }
 }
 
 @media (max-width: 350px) {
-    .ad-title span {
+    .reward-title span {
         display: none;
     }
 
-    .ad-countdown {
+    .reward-countdown {
         min-width: 65px;
     }
 
-    .ad-skip {
+    .reward-skip {
         min-width: 70px;
         padding: 0 6px;
         font-size: 8px;
     }
 
-    .ad-collect {
+    .reward-collect {
         min-width: 100px;
         padding: 0 6px;
         font-size: 8px;
     }
 
-    .ad-bottom-left {
+    .reward-bottom-left {
         display: none;
     }
 
-    .ad-bottom {
+    .reward-bottom {
         justify-content: flex-end;
     }
 }
@@ -1635,11 +1635,11 @@
         font-size: 7px;
     }
 
-    .ad-content h2 {
+    .reward-content h2 {
         font-size: 20px;
     }
 
-    .ad-collect {
+    .reward-collect {
         min-width: 94px;
         font-size: 7px;
     }

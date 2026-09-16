@@ -405,61 +405,61 @@ const Conversion = ({
         typeof document !== "undefined" &&
         createPortal(
           <div
-            className="ad-overlay"
+            className="reward-overlay"
             role="dialog"
             aria-modal="true"
           >
             <div
-              className="ad-container"
+              className="reward-container"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 type="button"
-                className="ad-close"
+                className="reward-close"
                 onClick={handleCloseAd}
-                aria-label="Close advertisement"
+                aria-label="Close reward screen"
               >
                 <X size={19} />
               </button>
 
-              <div className="ad-header">
-                <div className="ad-title">
+              <div className="reward-header">
+                <div className="reward-title">
                   <MonitorPlay size={17} />
-                  <span>Advertisement</span>
+                  <span>Sponsored Reward</span>
                 </div>
 
-                <span className="ad-sponsored">
-                  ADVERTISEMENT
+                <span className="reward-sponsored">
+                  SPONSORED
                 </span>
               </div>
 
-              <div className="ad-content">
-                <div className="ad-logo">
-                  <div className="ad-ring ring-one"></div>
-                  <div className="ad-ring ring-two"></div>
+              <div className="reward-content">
+                <div className="reward-logo">
+                  <div className="reward-ring reward-ring-one"></div>
+                  <div className="reward-ring reward-ring-two"></div>
 
-                  <div className="ad-logo-center">
+                  <div className="reward-logo-center">
                     <MonitorPlay size={32} />
                   </div>
                 </div>
 
-                <h2>Reward Ad</h2>
+                <h2>Reward Preview</h2>
 
                 <p>
                   Please keep this advertisement open until the
                   timer finishes.
                 </p>
 
-                <div className="ad-loader">
+                <div className="reward-loader">
                   <div
-                    className="ad-loader-fill"
+                    className="reward-loader-fill"
                     style={{
                       width: `${((20 - adSeconds) / 20) * 100}%`,
                     }}
                   ></div>
                 </div>
 
-                <div className="ad-message">
+                <div className="reward-message">
                   {adSeconds > 10
                     ? `Please wait ${adSeconds} seconds`
                     : adSeconds > 0
@@ -468,30 +468,30 @@ const Conversion = ({
                 </div>
               </div>
 
-              <div className="ad-bottom">
-                <div className="ad-bottom-left">
-                  <span>Reward Advertisement</span>
+              <div className="reward-bottom">
+                <div className="reward-bottom-left">
+                  <span>Reward Preview</span>
                   <span>Secure</span>
                 </div>
 
-                <div className="ad-bottom-right">
+                <div className="reward-bottom-right">
                   {adSeconds > 10 ? (
-                    <div className="ad-countdown">
-                      <span>Ad ends in</span>
+                    <div className="reward-countdown">
+                      <span>Ends in</span>
                       <strong>{adSeconds}s</strong>
                     </div>
                   ) : adSeconds > 0 ? (
                     <button
                       type="button"
-                      className="ad-skip"
+                      className="reward-skip"
                       onClick={handleCloseAd}
                     >
-                      Skip Ad
+                      Skip
                     </button>
                   ) : (
                     <button
                       type="button"
-                      className="ad-collect"
+                      className="reward-collect"
                       onClick={handleCollectReward}
                     >
                       <CheckCircle2 size={15} />
