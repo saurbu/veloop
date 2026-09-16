@@ -8,32 +8,60 @@ import {
 } from "lucide-react";
 import "../css/ExchangeCard.css";
 
-
-
-const ExchangeCard = ({availableGems = 0}) => {
+const ExchangeCard = ({
+  availableGems = 0,
+  availableVEs = 0,
+  onConversionComplete,
+}) => {
   const [amount, setAmount] = useState("");
   const [swapped, setSwapped] = useState(false);
   const [preview, setPreview] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [converted, setConverted] = useState(false);
 
-  const numericAmount = Number(amount);
   const GEM_TO_VE = 5.39;
-  const MAX_GEMS = availableGems;
   const MIN_GEMS = 20;
+
+  const maxAmount = swapped
+    ? availableVEs
+    : availableGems;
+
+  const numericAmount = Number(amount);
+
   const outputAmount =
-    amount !== "" && !isNaN(numericAmount) && numericAmount > 0
+    amount !== "" &&
+    !isNaN(numericAmount) &&
+    numericAmount > 0
       ? swapped
         ? (numericAmount / GEM_TO_VE).toFixed(2)
         : (numericAmount * GEM_TO_VE).toFixed(2)
       : "0";
 
-  const isEmpty = amount === "" || isNaN(numericAmount) || numericAmount <= 0;
+  const isEmpty =
+    amount === "" ||
+    isNaN(numericAmount) ||
+    numericAmount <= 0;
+
   const isBelowMinimum =
-    !swapped && numericAmount > 0 && numericAmount < MIN_GEMS;
-  const canConvert = !swapped
-    ? numericAmount >= MIN_GEMS
-    : numericAmount >= MIN_GEMS * GEM_TO_VE;
+    !swapped &&
+    numericAmount > 0 &&
+    numericAmount < MIN_GEMS;
+
+  const requiredVE = MIN_GEMS * GEM_TO_VE;
+
+  const insufficientBalance = swapped
+    ? numericAmount > availableVEs
+    : numericAmount > availableGems;
+
+  const canConvert =
+    !isEmpty &&
+    !isBelowMinimum &&
+    !insufficientBalance &&
+    (
+      swapped
+        ? numericAmount >= requiredVE
+        : numericAmount >= MIN_GEMS
+    );
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
@@ -53,13 +81,7 @@ const ExchangeCard = ({availableGems = 0}) => {
   };
 
   const handleMax = () => {
-    if (swapped) {
-      const maxVE = (MAX_GEMS * GEM_TO_VE).toFixed(2);
-      setAmount(maxVE);
-    } else {
-      setAmount(MAX_GEMS.toString());
-    }
-
+    setAmount(maxAmount.toString());
     setPreview(false);
     setConverted(false);
   };
@@ -102,6 +124,25 @@ const ExchangeCard = ({availableGems = 0}) => {
       return;
     }
 
+    const currentAmount = numericAmount;
+    const output = Number(outputAmount);
+
+    if (swapped) {
+      onConversionComplete?.({
+        gemsUsed: 0,
+        vesReceived: 0,
+        vesUsed: currentAmount,
+        gemsReceived: output,
+      });
+    } else {
+      onConversionComplete?.({
+        gemsUsed: currentAmount,
+        vesReceived: output,
+        vesUsed: 0,
+        gemsReceived: 0,
+      });
+    }
+
     setShowConfirm(false);
     setConverted(true);
 
@@ -122,7 +163,10 @@ const ExchangeCard = ({availableGems = 0}) => {
         <div className="exchange-card">
           <div className="exchange-heading">
             <div>
-              <span className="exchange-eyebrow">EXCHANGE CENTER</span>
+              <span className="exchange-eyebrow">
+                EXCHANGE CENTER
+              </span>
+
               <h3 className="exchange-title">
                 Convert your {swapped ? "VEs" : "Gems"}
               </h3>
@@ -130,10 +174,11 @@ const ExchangeCard = ({availableGems = 0}) => {
 
             <div className="exchange-status">
               <span></span>
-              Live Rate | 
+              Live Rate |
+
               <div className="exchange-rate">
-              1 Gem = {GEM_TO_VE} VEs
-            </div>
+                1 Gem = {GEM_TO_VE} VEs
+              </div>
             </div>
           </div>
 
@@ -145,13 +190,21 @@ const ExchangeCard = ({availableGems = 0}) => {
                 </span>
 
                 <span className="box-type">
-                  {swapped ? "SOURCE" : "SOURCE"}
+                  SOURCE
                 </span>
               </div>
 
               <div className="exchange-input-row">
-                <div className={`gem-icon ${swapped ? "ve-source-icon" : ""}`}>
-                  {swapped ? <span className="ve-coin">VE</span> : "💎"}
+                <div
+                  className={`gem-icon ${
+                    swapped ? "ve-source-icon" : ""
+                  }`}
+                >
+                  {swapped ? (
+                    <span className="ve-coin">VE</span>
+                  ) : (
+                    "💎"
+                  )}
                 </div>
 
                 <div className="amount-content">
@@ -162,11 +215,17 @@ const ExchangeCard = ({availableGems = 0}) => {
                     onChange={handleAmountChange}
                     placeholder="0"
                     className="amount-input"
-                    aria-label={swapped ? "VE amount" : "Gems amount"}
+                    aria-label={
+                      swapped
+                        ? "VE amount"
+                        : "Gems amount"
+                    }
                   />
 
                   <div className="amount-label">
-                    {swapped ? "VEs to convert" : "Gems to convert"}
+                    {swapped
+                      ? "VEs to convert"
+                      : "Gems to convert"}
                   </div>
                 </div>
 
@@ -190,7 +249,9 @@ const ExchangeCard = ({availableGems = 0}) => {
 
             <button
               type="button"
-              className={`swap-button ${swapped ? "is-swapped" : ""}`}
+              className={`swap-button ${
+                swapped ? "is-swapped" : ""
+              }`}
               onClick={handleSwap}
               aria-label="Swap conversion"
             >
@@ -215,7 +276,9 @@ const ExchangeCard = ({availableGems = 0}) => {
                 <div className="amount-content">
                   <div
                     className={`amount-output ${
-                      swapped ? "output-purple" : ""
+                      swapped
+                        ? "output-purple"
+                        : ""
                     }`}
                   >
                     {outputAmount}
@@ -228,8 +291,20 @@ const ExchangeCard = ({availableGems = 0}) => {
                   </div>
                 </div>
 
-                <div className={`ve-icon ${swapped ? "gem-output-icon" : ""}`}>
-                  {swapped ? "💎" : <span className="ve-coin">VE</span>}
+                <div
+                  className={`ve-icon ${
+                    swapped
+                      ? "gem-output-icon"
+                      : ""
+                  }`}
+                >
+                  {swapped ? (
+                    "💎"
+                  ) : (
+                    <span className="ve-coin">
+                      VE
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -240,34 +315,43 @@ const ExchangeCard = ({availableGems = 0}) => {
               onClick={handlePreview}
             >
               <span>Preview Conversion</span>
-              <ArrowRight size={18} strokeWidth={2} />
+              <ArrowRight
+                size={18}
+                strokeWidth={2}
+              />
             </button>
           </div>
-
-          {/* <div className="exchange-footer">
-            
-
-            <div className="minimum-rate">
-              Minimum conversion: {MIN_GEMS} Gems
-            </div>
-          </div> */}
 
           {preview && (
             <div className="conversion-preview">
               <div className="preview-header">
-                <span>Conversion Preview</span>
+                <span>
+                  Conversion Preview
+                </span>
+
                 {isBelowMinimum && (
                   <span className="preview-warning-label">
                     Below minimum
                   </span>
                 )}
+
+                {!isBelowMinimum &&
+                  insufficientBalance && (
+                    <span className="preview-warning-label">
+                      Insufficient balance
+                    </span>
+                  )}
               </div>
 
               <div className="preview-main">
                 <div className="preview-info">
-                  <span>You are converting</span>
+                  <span>
+                    You are converting
+                  </span>
+
                   <strong>
-                    {amount} {swapped ? "VEs" : "Gems"}
+                    {amount}{" "}
+                    {swapped ? "VEs" : "Gems"}
                   </strong>
                 </div>
 
@@ -279,9 +363,13 @@ const ExchangeCard = ({availableGems = 0}) => {
                 </div>
 
                 <div className="preview-info">
-                  <span>You will receive</span>
+                  <span>
+                    You will receive
+                  </span>
+
                   <strong className="preview-ve">
-                    {outputAmount} {swapped ? "Gems" : "VEs"}
+                    {outputAmount}{" "}
+                    {swapped ? "Gems" : "VEs"}
                   </strong>
                 </div>
               </div>
@@ -289,22 +377,40 @@ const ExchangeCard = ({availableGems = 0}) => {
               {isBelowMinimum && (
                 <div className="minimum-warning">
                   <AlertCircle size={15} />
+
                   <span>
-                    Minimum conversion is {MIN_GEMS} Gems
+                    Minimum conversion is{" "}
+                    {MIN_GEMS} Gems
                   </span>
                 </div>
               )}
 
+              {!isBelowMinimum &&
+                insufficientBalance && (
+                  <div className="minimum-warning">
+                    <AlertCircle size={15} />
+
+                    <span>
+                      Insufficient{" "}
+                      {swapped ? "VEs" : "Gems"} balance
+                    </span>
+                  </div>
+                )}
+
               <button
                 type="button"
                 className={`convert-btn ${
-                  !canConvert ? "convert-btn-disabled" : ""
+                  !canConvert
+                    ? "convert-btn-disabled"
+                    : ""
                 }`}
                 disabled={!canConvert}
                 onClick={handleConvertClick}
               >
                 {isBelowMinimum
                   ? `Minimum ${MIN_GEMS} Gems`
+                  : insufficientBalance
+                  ? "Insufficient Balance"
                   : "Convert"}
               </button>
             </div>
@@ -313,6 +419,7 @@ const ExchangeCard = ({availableGems = 0}) => {
           {converted && (
             <div className="conversion-success">
               <CheckCircle size={17} />
+
               <span>
                 Conversion completed successfully!
               </span>
@@ -328,7 +435,9 @@ const ExchangeCard = ({availableGems = 0}) => {
         >
           <div
             className="confirmation-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
             <button
               type="button"
@@ -343,26 +452,37 @@ const ExchangeCard = ({availableGems = 0}) => {
               <ArrowLeftRight size={24} />
             </div>
 
-            <h3>Confirm Conversion</h3>
+            <h3>
+              Confirm Conversion
+            </h3>
 
             <p className="confirm-text">
-              Review your conversion before continuing.
+              Review your conversion before
+              continuing.
             </p>
 
             <div className="confirm-details">
               <div className="confirm-amount">
-                <span>You convert</span>
+                <span>
+                  You convert
+                </span>
+
                 <strong>
-                  {amount} {swapped ? "VEs" : "Gems"}
+                  {amount}{" "}
+                  {swapped ? "VEs" : "Gems"}
                 </strong>
               </div>
 
               <ArrowRight size={19} />
 
               <div className="confirm-amount">
-                <span>You receive</span>
+                <span>
+                  You receive
+                </span>
+
                 <strong className="confirm-output">
-                  {outputAmount} {swapped ? "Gems" : "VEs"}
+                  {outputAmount}{" "}
+                  {swapped ? "Gems" : "VEs"}
                 </strong>
               </div>
             </div>

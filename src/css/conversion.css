@@ -45,7 +45,7 @@
 .container-card {
     width: 100%;
     margin: 0;
-    padding: 9px 40px 0;
+    padding: 9px 30px 0;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -395,18 +395,22 @@
 
 .card-action {
     width: 100%;
+    height: 36px;
 }
 
 .convert-btn1,
-.converted-message {
+.converted-message,
+.insufficient-card-message {
     width: 100%;
     height: 36px;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 7px;
-    border-radius: 5px;
     box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .convert-btn1 {
@@ -481,6 +485,39 @@
     font-size: 12px;
     font-weight: 650;
     animation: successIn 0.4s ease;
+}
+
+.insufficient-card-message {
+    border: 1px solid rgba(255, 55, 75, 0.8);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 45, 65, 0.2),
+        rgba(115, 12, 28, 0.16)
+    );
+    color: #ff687a;
+    font-size: 13px;
+    font-weight: 650;
+    box-shadow:
+        inset 0 0 12px rgba(255, 50, 70, 0.06),
+        0 0 12px rgba(255, 40, 60, 0.1);
+    animation: insufficientIn 0.25s ease;
+}
+
+.insufficient-card-message svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    stroke-width: 2;
+}
+
+.insufficient-card-message span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+}
+
+.insufficient-card-message small {
+    display: none;
 }
 
 .watch-ad-box {
@@ -733,24 +770,16 @@
     cursor: pointer !important;
     box-sizing: border-box !important;
     transition:
-        opacity 0.25s ease,
-        visibility 0.25s ease,
         background 0.2s ease,
         border-color 0.2s ease,
         transform 0.2s ease;
 }
 
-.ad-close:hover:not(:disabled) {
+.ad-close:hover {
     background: rgba(255, 255, 255, 0.1) !important;
     border-color: rgba(255, 255, 255, 0.42) !important;
     color: #fff !important;
     transform: scale(1.05);
-}
-
-.ad-close-disabled {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
 }
 
 .ad-header {
@@ -882,7 +911,7 @@
     border-radius: inherit;
     background: linear-gradient(90deg, #7037d1, #b477ff);
     box-shadow: 0 0 15px rgba(162, 93, 255, 0.7);
-    transition: width 1s linear;
+    transition: width 0.2s linear;
 }
 
 .ad-message {
@@ -914,6 +943,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    min-width: 115px;
 }
 
 .ad-countdown {
@@ -972,6 +1002,57 @@
 }
 
 .ad-skip:active {
+    transform: translateY(0);
+}
+
+.ad-collect {
+    min-width: 135px;
+    height: 35px;
+    padding: 0 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    border: 1px solid rgba(62, 230, 154, 0.5);
+    border-radius: 8px;
+    background: linear-gradient(
+        135deg,
+        rgba(32, 170, 103, 0.9),
+        rgba(15, 111, 68, 0.95)
+    );
+    color: #fff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+    animation: collectAppear 0.35s ease;
+    box-shadow:
+        0 0 18px rgba(39, 207, 126, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.ad-collect:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(39, 196, 119, 1),
+        rgba(18, 132, 79, 1)
+    );
+    border-color: rgba(98, 255, 177, 0.7);
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 24px rgba(39, 207, 126, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.ad-collect:active {
     transform: translateY(0);
 }
 
@@ -1052,6 +1133,18 @@
     }
 }
 
+@keyframes insufficientIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @keyframes modalIn {
     from {
         opacity: 0;
@@ -1117,10 +1210,22 @@
     }
 }
 
+@keyframes collectAppear {
+    from {
+        opacity: 0;
+        transform: translateY(5px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 @media (max-width: 900px) {
     .container-card {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 15px;
     }
 
     .cont-cnvrsn {
@@ -1165,7 +1270,7 @@
 
     .container-card {
         width: 100%;
-        gap: 9px;
+        gap: 15px;
     }
 
     .cont-cnvrsn {
@@ -1216,9 +1321,22 @@
         margin-bottom: 6px;
     }
 
-    .convert-btn1 {
+    .card-action {
         height: 32px;
+    }
+
+    .convert-btn1,
+    .insufficient-card-message,
+    .converted-message {
+        height: 32px;
+    }
+
+    .convert-btn1 {
         font-size: 11px;
+    }
+
+    .insufficient-card-message {
+        font-size: 10px;
     }
 
     .watch-ad {
@@ -1258,6 +1376,12 @@
 
     .ad-skip {
         min-width: 90px;
+        height: 32px;
+        font-size: 10px;
+    }
+
+    .ad-collect {
+        min-width: 120px;
         height: 32px;
         font-size: 10px;
     }
@@ -1319,9 +1443,28 @@
         font-size: 8px;
     }
 
-    .convert-btn1 {
+    .card-action {
         height: 29px;
+    }
+
+    .convert-btn1,
+    .insufficient-card-message,
+    .converted-message {
+        height: 29px;
+    }
+
+    .convert-btn1 {
         font-size: 9px;
+    }
+
+    .insufficient-card-message {
+        font-size: 8px;
+        gap: 5px;
+    }
+
+    .insufficient-card-message svg {
+        width: 13px;
+        height: 13px;
     }
 
     .watch-ad {
@@ -1395,6 +1538,18 @@
         font-size: 9px;
     }
 
+    .ad-collect {
+        min-width: 112px;
+        height: 29px;
+        padding: 0 8px;
+        font-size: 8px;
+    }
+
+    .ad-collect svg {
+        width: 13px;
+        height: 13px;
+    }
+
     .ad-content {
         padding: 18px;
     }
@@ -1437,6 +1592,12 @@
         font-size: 8px;
     }
 
+    .ad-collect {
+        min-width: 100px;
+        padding: 0 6px;
+        font-size: 8px;
+    }
+
     .ad-bottom-left {
         display: none;
     }
@@ -1465,7 +1626,8 @@
         font-size: 7px;
     }
 
-    .convert-btn1 {
+    .convert-btn1,
+    .insufficient-card-message {
         font-size: 8px;
     }
 
@@ -1475,5 +1637,10 @@
 
     .ad-content h2 {
         font-size: 20px;
+    }
+
+    .ad-collect {
+        min-width: 94px;
+        font-size: 7px;
     }
 }

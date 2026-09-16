@@ -9,10 +9,15 @@ import {
   Gem,
   Zap,
   Sparkles,
+  AlertCircle,
 } from "lucide-react";
 import "../css/conversion.css";
 
-const Conversion = () => {
+const Conversion = ({
+  availableGems = 0,
+  onDirectConvert,
+  onRewardCollected,
+}) => {
   const gems = [
     {
       id: 1,
@@ -43,21 +48,77 @@ const Conversion = () => {
   const [selectedReward, setSelectedReward] = useState(null);
   const [converted, setConverted] = useState(null);
   const [showAd, setShowAd] = useState(false);
-  const [adSeconds, setAdSeconds] = useState(10);
+  const [adSeconds, setAdSeconds] = useState(20);
+  const [adReward, setAdReward] = useState(null);
+  const [insufficientReward, setInsufficientReward] = useState(null);
 
   const conversionTimerRef = useRef(null);
+  const adTimerRef = useRef(null);
 
   const handleConvert = (reward) => {
+    if (availableGems < reward.gems) {
+      setInsufficientReward(reward.id);
+
+      if (conversionTimerRef.current) {
+        clearTimeout(conversionTimerRef.current);
+      }
+
+      conversionTimerRef.current = setTimeout(() => {
+        setInsufficientReward(null);
+        conversionTimerRef.current = null;
+      }, 3000);
+
+      return;
+    }
+
+    setInsufficientReward(null);
     setSelectedReward(reward);
   };
 
   const handleConfirm = () => {
     if (!selectedReward) return;
 
+    if (availableGems < selectedReward.gems) {
+      setSelectedReward(null);
+      setInsufficientReward(selectedReward.id);
+
+      if (conversionTimerRef.current) {
+        clearTimeout(conversionTimerRef.current);
+      }
+
+      conversionTimerRef.current = setTimeout(() => {
+        setInsufficientReward(null);
+        conversionTimerRef.current = null;
+      }, 3000);
+
+      return;
+    }
+
+    const success = onDirectConvert
+      ? onDirectConvert(selectedReward)
+      : true;
+
+    if (!success) {
+      setSelectedReward(null);
+      setInsufficientReward(selectedReward.id);
+
+      if (conversionTimerRef.current) {
+        clearTimeout(conversionTimerRef.current);
+      }
+
+      conversionTimerRef.current = setTimeout(() => {
+        setInsufficientReward(null);
+        conversionTimerRef.current = null;
+      }, 3000);
+
+      return;
+    }
+
     const rewardId = selectedReward.id;
 
     setConverted(rewardId);
     setSelectedReward(null);
+    setInsufficientReward(null);
 
     if (conversionTimerRef.current) {
       clearTimeout(conversionTimerRef.current);
@@ -73,33 +134,64 @@ const Conversion = () => {
     setSelectedReward(null);
   };
 
-  const handleWatchAd = (e) => {
+  const handleWatchAd = (e, reward) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (showAd) return;
 
-    setAdSeconds(10);
+    setAdReward(reward);
+    setAdSeconds(20);
     setShowAd(true);
   };
 
   const handleCloseAd = () => {
-    if (adSeconds > 0) return;
+    if (adTimerRef.current) {
+      clearInterval(adTimerRef.current);
+      adTimerRef.current = null;
+    }
 
     setShowAd(false);
-    setAdSeconds(10);
+    setAdReward(null);
+    setAdSeconds(20);
+  };
+
+  const handleCollectReward = () => {
+    if (!adReward || adSeconds > 0) return;
+
+    const reward = adReward;
+    const rewardId = reward.id;
+
+    if (onRewardCollected) {
+      onRewardCollected(reward.ve);
+    }
+
+    if (conversionTimerRef.current) {
+      clearTimeout(conversionTimerRef.current);
+    }
+
+    setConverted(rewardId);
+
+    handleCloseAd();
+
+    conversionTimerRef.current = setTimeout(() => {
+      setConverted(null);
+      conversionTimerRef.current = null;
+    }, 10000);
   };
 
   useEffect(() => {
     if (!showAd) return;
 
-    const previousOverflow = document.body.style.overflow;
-    const previousTouchAction = document.body.style.touchAction;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousBodyTouchAction = document.body.style.touchAction;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
 
     document.body.style.overflow = "hidden";
     document.body.style.touchAction = "none";
+    document.documentElement.style.overflow = "hidden";
 
-    setAdSeconds(10);
+    setAdSeconds(20);
 
     let timer;
 
@@ -107,6 +199,7 @@ const Conversion = () => {
       setAdSeconds((prev) => {
         if (prev <= 1) {
           window.clearInterval(timer);
+          adTimerRef.current = null;
           return 0;
         }
 
@@ -114,18 +207,26 @@ const Conversion = () => {
       });
     }, 1000);
 
+    adTimerRef.current = timer;
+
     return () => {
       window.clearInterval(timer);
-      document.body.style.overflow = previousOverflow;
-      document.body.style.touchAction = previousTouchAction;
+      adTimerRef.current = null;
+
+      document.body.style.overflow = previousBodyOverflow;
+      document.body.style.touchAction = previousBodyTouchAction;
+      document.documentElement.style.overflow = previousHtmlOverflow;
     };
   }, [showAd]);
 
   useEffect(() => {
     return () => {
       window.clearTimeout(conversionTimerRef.current);
+      window.clearInterval(adTimerRef.current);
+
       document.body.style.overflow = "";
       document.body.style.touchAction = "";
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -145,6 +246,7 @@ const Conversion = () => {
       <div className="container-card">
         {gems.map((value) => {
           const rate = (value.ve / value.gems).toFixed(2);
+          const isInsufficient = insufficientReward === value.id;
 
           return (
             <div
@@ -191,6 +293,11 @@ const Conversion = () => {
                     <CheckCircle2 size={16} />
                     Reward Converted
                   </div>
+                ) : isInsufficient ? (
+                  <div className="insufficient-card-message">
+                    <AlertCircle size={16} />
+                      Insufficient Balance
+                  </div>
                 ) : (
                   <button
                     type="button"
@@ -209,7 +316,7 @@ const Conversion = () => {
                 <button
                   type="button"
                   className="watch-ad"
-                  onClick={handleWatchAd}
+                  onClick={(e) => handleWatchAd(e, value)}
                 >
                   <MonitorPlay size={14} />
                   Watch Ad to proceed
@@ -308,11 +415,8 @@ const Conversion = () => {
             >
               <button
                 type="button"
-                className={`ad-close ${
-                  adSeconds > 0 ? "ad-close-disabled" : ""
-                }`}
+                className="ad-close"
                 onClick={handleCloseAd}
-                disabled={adSeconds > 0}
                 aria-label="Close advertisement"
               >
                 <X size={19} />
@@ -350,14 +454,16 @@ const Conversion = () => {
                   <div
                     className="ad-loader-fill"
                     style={{
-                      width: `${((10 - adSeconds) / 10) * 100}%`,
+                      width: `${((20 - adSeconds) / 20) * 100}%`,
                     }}
                   ></div>
                 </div>
 
                 <div className="ad-message">
-                  {adSeconds > 0
+                  {adSeconds > 10
                     ? `Please wait ${adSeconds} seconds`
+                    : adSeconds > 0
+                    ? `Skip available • ${adSeconds} seconds remaining`
                     : "Advertisement completed"}
                 </div>
               </div>
@@ -369,18 +475,27 @@ const Conversion = () => {
                 </div>
 
                 <div className="ad-bottom-right">
-                  {adSeconds > 0 ? (
+                  {adSeconds > 10 ? (
                     <div className="ad-countdown">
                       <span>Ad ends in</span>
                       <strong>{adSeconds}s</strong>
                     </div>
-                  ) : (
+                  ) : adSeconds > 0 ? (
                     <button
                       type="button"
                       className="ad-skip"
                       onClick={handleCloseAd}
                     >
                       Skip Ad
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="ad-collect"
+                      onClick={handleCollectReward}
+                    >
+                      <CheckCircle2 size={15} />
+                      Collect Reward
                     </button>
                   )}
                 </div>

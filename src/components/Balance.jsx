@@ -4,8 +4,11 @@ import gem from "../assets/gems.png";
 import ves from "../assets/ves.png";
 
 const Balance = ({ availableGems = 0, availableVEs = 0 }) => {
-  const nextReward = 20;
-  const progress = Math.min((availableGems / nextReward) * 100, 100);
+  const nextReward = 20
+  const progress = Math.min(
+    (availableGems / nextReward) * 100,
+    100
+  )
 
   return (
     <div className="bal">
@@ -49,7 +52,9 @@ const Balance = ({ availableGems = 0, availableVEs = 0 }) => {
 
           <div className="reward-content">
             <span>Next Reward</span>
-            <strong>{Math.max(nextReward - availableGems, 0)} Gems away</strong>
+            <strong>
+              {Math.max(nextReward - availableGems, 0).toFixed(3)} Gems away
+            </strong>
 
             <div className="reward-progress">
               <div

@@ -105,11 +105,6 @@ const Info = () => {
                             );
                         })}
                     </div>
-
-                    <button className="info-explore">
-                        <span>Explore Rewards</span>
-                        <ArrowRight size={20} />
-                    </button>
                 </div>
 
                 <div className="info-benefits">

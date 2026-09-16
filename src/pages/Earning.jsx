@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Balance from '../components/Balance'
 import Conversion from '../components/Conversion'
 import ExchangeCard from '../components/ExchangeCard'
@@ -6,9 +7,48 @@ import Info from '../components/Info.jsx'
 import Work from '../components/Work'
 
 const Earning = () => {
-  const balance = {
-    gems: 440,
+  const [balance, setBalance] = useState({
+    gems: 10,
     ves: 3850
+  })
+
+  const handleManualConversion = ({
+    gemsUsed = 0,
+    vesReceived = 0,
+    vesUsed = 0,
+    gemsReceived = 0
+  }) => {
+    setBalance((prev) => ({
+      gems: Math.max(
+        0,
+        prev.gems - gemsUsed + gemsReceived
+      ),
+      ves: Math.max(
+        0,
+        prev.ves - vesUsed + vesReceived
+      )
+    }))
+  }
+
+  const handleDirectRewardConvert = (reward) => {
+    if (balance.gems < reward.gems) {
+      return false
+    }
+
+    setBalance((prev) => ({
+      ...prev,
+      gems: prev.gems - reward.gems,
+      ves: prev.ves + reward.ve
+    }))
+
+    return true
+  }
+
+  const handleAdReward = (veReward) => {
+    setBalance((prev) => ({
+      ...prev,
+      ves: prev.ves + veReward
+    }))
   }
 
   return (
@@ -61,11 +101,19 @@ const Earning = () => {
             availableVEs={balance.ves}
           />
 
-          <ExchangeCard availableGems={balance.gems}/>
+          <ExchangeCard
+            availableGems={balance.gems}
+            availableVEs={balance.ves}
+            onConversionComplete={handleManualConversion}
+          />
 
           <Work />
 
-          <Conversion />
+          <Conversion
+            availableGems={balance.gems}
+            onDirectConvert={handleDirectRewardConvert}
+            onRewardCollected={handleAdReward}
+          />
 
           <Info />
         </div>
