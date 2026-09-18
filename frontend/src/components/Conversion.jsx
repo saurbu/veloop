@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import "../css/conversion.css";
 
+const API_URL = "http://localhost:5000";
+
 const Conversion = ({
   availableGems = 0,
   onDirectConvert,
@@ -51,74 +53,26 @@ const Conversion = ({
   const [adSeconds, setAdSeconds] = useState(20);
   const [adReward, setAdReward] = useState(null);
   const [insufficientReward, setInsufficientReward] = useState(null);
+  const [processing, setProcessing] = useState(false);
 
   const conversionTimerRef = useRef(null);
   const adTimerRef = useRef(null);
 
-  const handleConvert = (reward) => {
-    if (availableGems < reward.gems) {
-      setInsufficientReward(reward.id);
+  const showInsufficient = (rewardId) => {
+    setInsufficientReward(rewardId);
 
-      if (conversionTimerRef.current) {
-        clearTimeout(conversionTimerRef.current);
-      }
-
-      conversionTimerRef.current = setTimeout(() => {
-        setInsufficientReward(null);
-        conversionTimerRef.current = null;
-      }, 3000);
-
-      return;
+    if (conversionTimerRef.current) {
+      clearTimeout(conversionTimerRef.current);
     }
 
-    setInsufficientReward(null);
-    setSelectedReward(reward);
+    conversionTimerRef.current = setTimeout(() => {
+      setInsufficientReward(null);
+      conversionTimerRef.current = null;
+    }, 3000);
   };
 
-  const handleConfirm = () => {
-    if (!selectedReward) return;
-
-    if (availableGems < selectedReward.gems) {
-      setSelectedReward(null);
-      setInsufficientReward(selectedReward.id);
-
-      if (conversionTimerRef.current) {
-        clearTimeout(conversionTimerRef.current);
-      }
-
-      conversionTimerRef.current = setTimeout(() => {
-        setInsufficientReward(null);
-        conversionTimerRef.current = null;
-      }, 3000);
-
-      return;
-    }
-
-    const success = onDirectConvert
-      ? onDirectConvert(selectedReward)
-      : true;
-
-    if (!success) {
-      setSelectedReward(null);
-      setInsufficientReward(selectedReward.id);
-
-      if (conversionTimerRef.current) {
-        clearTimeout(conversionTimerRef.current);
-      }
-
-      conversionTimerRef.current = setTimeout(() => {
-        setInsufficientReward(null);
-        conversionTimerRef.current = null;
-      }, 3000);
-
-      return;
-    }
-
-    const rewardId = selectedReward.id;
-
+  const showConverted = (rewardId) => {
     setConverted(rewardId);
-    setSelectedReward(null);
-    setInsufficientReward(null);
 
     if (conversionTimerRef.current) {
       clearTimeout(conversionTimerRef.current);
@@ -130,7 +84,78 @@ const Conversion = ({
     }, 10000);
   };
 
+  const handleConvert = (reward) => {
+    if (availableGems < reward.gems) {
+      showInsufficient(reward.id);
+      return;
+    }
+
+    setInsufficientReward(null);
+    setSelectedReward(reward);
+  };
+
+  const handleConfirm = async () => {
+    if (!selectedReward || processing) {
+      return;
+    }
+
+    if (availableGems < selectedReward.gems) {
+      const rewardId = selectedReward.id;
+
+      setSelectedReward(null);
+      showInsufficient(rewardId);
+
+      return;
+    }
+
+    try {
+      setProcessing(true);
+
+      const response = await fetch(
+        `${API_URL}/api/rewards/convert`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            rewardId: selectedReward.id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        const rewardId = selectedReward.id;
+
+        setSelectedReward(null);
+        showInsufficient(rewardId);
+
+        return;
+      }
+
+      if (onDirectConvert) {
+        onDirectConvert(data.balance);
+      }
+
+      const rewardId = selectedReward.id;
+
+      setSelectedReward(null);
+      setInsufficientReward(null);
+      showConverted(rewardId);
+    } catch (error) {
+      console.error("Reward conversion failed:", error);
+    } finally {
+      setProcessing(false);
+    }
+  };
+
   const handleCancel = () => {
+    if (processing) {
+      return;
+    }
+
     setSelectedReward(null);
   };
 
@@ -138,7 +163,9 @@ const Conversion = ({
     e.preventDefault();
     e.stopPropagation();
 
-    if (showAd) return;
+    if (showAd || processing) {
+      return;
+    }
 
     setAdReward(reward);
     setAdSeconds(20);
@@ -146,6 +173,10 @@ const Conversion = ({
   };
 
   const handleCloseAd = () => {
+    if (processing) {
+      return;
+    }
+
     if (adTimerRef.current) {
       clearInterval(adTimerRef.current);
       adTimerRef.current = null;
@@ -156,32 +187,61 @@ const Conversion = ({
     setAdSeconds(20);
   };
 
-  const handleCollectReward = () => {
-    if (!adReward || adSeconds > 0) return;
-
-    const reward = adReward;
-    const rewardId = reward.id;
-
-    if (onRewardCollected) {
-      onRewardCollected(reward.ve);
+  const handleCollectReward = async () => {
+    if (!adReward || adSeconds > 0 || processing) {
+      return;
     }
 
-    if (conversionTimerRef.current) {
-      clearTimeout(conversionTimerRef.current);
+    try {
+      setProcessing(true);
+
+      const response = await fetch(
+        `${API_URL}/api/rewards/claim`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            rewardId: adReward.id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        console.error(data.message || "Reward claim failed");
+        return;
+      }
+
+      if (onRewardCollected) {
+        onRewardCollected(data.balance);
+      }
+
+      const rewardId = adReward.id;
+
+      if (adTimerRef.current) {
+        clearInterval(adTimerRef.current);
+        adTimerRef.current = null;
+      }
+
+      setShowAd(false);
+      setAdReward(null);
+      setAdSeconds(20);
+
+      showConverted(rewardId);
+    } catch (error) {
+      console.error("Reward claim failed:", error);
+    } finally {
+      setProcessing(false);
     }
-
-    setConverted(rewardId);
-
-    handleCloseAd();
-
-    conversionTimerRef.current = setTimeout(() => {
-      setConverted(null);
-      conversionTimerRef.current = null;
-    }, 10000);
   };
 
   useEffect(() => {
-    if (!showAd) return;
+    if (!showAd) {
+      return;
+    }
 
     const previousBodyOverflow = document.body.style.overflow;
     const previousBodyTouchAction = document.body.style.touchAction;
@@ -193,9 +253,7 @@ const Conversion = ({
 
     setAdSeconds(20);
 
-    let timer;
-
-    timer = window.setInterval(() => {
+    const timer = window.setInterval(() => {
       setAdSeconds((prev) => {
         if (prev <= 1) {
           window.clearInterval(timer);
@@ -296,13 +354,14 @@ const Conversion = ({
                 ) : isInsufficient ? (
                   <div className="insufficient-card-message">
                     <AlertCircle size={16} />
-                      Insufficient Balance
+                    Insufficient Balance
                   </div>
                 ) : (
                   <button
                     type="button"
                     className="convert-btn1"
                     onClick={() => handleConvert(value)}
+                    disabled={processing}
                   >
                     <span className="convert-icon">
                       <Zap size={14} />
@@ -317,6 +376,7 @@ const Conversion = ({
                   type="button"
                   className="watch-ad"
                   onClick={(e) => handleWatchAd(e, value)}
+                  disabled={processing}
                 >
                   <MonitorPlay size={14} />
                   Watch Ad to proceed
@@ -341,6 +401,7 @@ const Conversion = ({
               className="modal-close"
               onClick={handleCancel}
               aria-label="Close"
+              disabled={processing}
             >
               <X size={18} />
             </button>
@@ -385,6 +446,7 @@ const Conversion = ({
                 type="button"
                 className="modal-no"
                 onClick={handleCancel}
+                disabled={processing}
               >
                 No
               </button>
@@ -393,8 +455,9 @@ const Conversion = ({
                 type="button"
                 className="modal-yes"
                 onClick={handleConfirm}
+                disabled={processing}
               >
-                Yes, Convert
+                {processing ? "Processing..." : "Yes, Convert"}
               </button>
             </div>
           </div>
@@ -418,6 +481,7 @@ const Conversion = ({
                 className="reward-close"
                 onClick={handleCloseAd}
                 aria-label="Close reward screen"
+                disabled={processing}
               >
                 <X size={19} />
               </button>
@@ -485,6 +549,7 @@ const Conversion = ({
                       type="button"
                       className="reward-skip"
                       onClick={handleCloseAd}
+                      disabled={processing}
                     >
                       Skip
                     </button>
@@ -493,9 +558,10 @@ const Conversion = ({
                       type="button"
                       className="reward-collect"
                       onClick={handleCollectReward}
+                      disabled={processing}
                     >
                       <CheckCircle2 size={15} />
-                      Collect Reward
+                      {processing ? "Processing..." : "Collect Reward"}
                     </button>
                   )}
                 </div>

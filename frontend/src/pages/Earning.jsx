@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Balance from '../components/Balance'
 import Conversion from '../components/Conversion'
 import ExchangeCard from '../components/ExchangeCard'
@@ -6,49 +6,78 @@ import Header from '../components/Header'
 import Info from '../components/Info.jsx'
 import Work from '../components/Work'
 
+const API_URL = 'http://localhost:5000'
+
 const Earning = () => {
   const [balance, setBalance] = useState({
-    gems: 10,
-    ves: 3850
+    gems: 0,
+    ves: 0
   })
 
-  const handleManualConversion = ({
-    gemsUsed = 0,
-    vesReceived = 0,
-    vesUsed = 0,
-    gemsReceived = 0
-  }) => {
-    setBalance((prev) => ({
-      gems: Math.max(
-        0,
-        prev.gems - gemsUsed + gemsReceived
-      ),
-      ves: Math.max(
-        0,
-        prev.ves - vesUsed + vesReceived
-      )
-    }))
+  const [loading, setLoading] = useState(true)
+
+  const updateBalance = (updatedBalance) => {
+    if (!updatedBalance) {
+      return
+    }
+
+    setBalance({
+      gems: Number(updatedBalance.gems) || 0,
+      ves: Number(updatedBalance.ves) || 0
+    })
   }
 
-  const handleDirectRewardConvert = (reward) => {
-    if (balance.gems < reward.gems) {
+  const fetchBalance = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/balance`)
+      const data = await response.json()
+
+      if (data.success) {
+        updateBalance(data.balance)
+      }
+    } catch (error) {
+      console.error('Failed to fetch balance:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchBalance()
+  }, [])
+
+  const handleManualConversion = (updatedBalance) => {
+    if (!updatedBalance) {
       return false
     }
 
-    setBalance((prev) => ({
-      ...prev,
-      gems: prev.gems - reward.gems,
-      ves: prev.ves + reward.ve
-    }))
+    updateBalance(updatedBalance)
 
     return true
   }
 
-  const handleAdReward = (veReward) => {
-    setBalance((prev) => ({
-      ...prev,
-      ves: prev.ves + veReward
-    }))
+  const handleDirectRewardConvert = (updatedBalance) => {
+    if (!updatedBalance) {
+      return false
+    }
+
+    updateBalance(updatedBalance)
+
+    return true
+  }
+
+  const handleAdReward = (updatedBalance) => {
+    if (!updatedBalance) {
+      return false
+    }
+
+    updateBalance(updatedBalance)
+
+    return true
+  }
+
+  if (loading) {
+    return null
   }
 
   return (

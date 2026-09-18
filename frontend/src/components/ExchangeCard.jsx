@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import "../css/ExchangeCard.css";
 
+const API_URL = "http://localhost:5000";
+
 const ExchangeCard = ({
   availableGems = 0,
   availableVEs = 0,
@@ -18,6 +20,8 @@ const ExchangeCard = ({
   const [preview, setPreview] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [converted, setConverted] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const GEM_TO_VE = 5.39;
   const MIN_GEMS = 20;
@@ -57,26 +61,25 @@ const ExchangeCard = ({
     !isEmpty &&
     !isBelowMinimum &&
     !insufficientBalance &&
-    (
-      swapped
-        ? numericAmount >= requiredVE
-        : numericAmount >= MIN_GEMS
-    );
+    (swapped
+      ? numericAmount >= requiredVE
+      : numericAmount >= MIN_GEMS);
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
 
+    setErrorMessage("");
+    setConverted(false);
+
     if (value === "") {
       setAmount("");
       setPreview(false);
-      setConverted(false);
       return;
     }
 
     if (/^\d*\.?\d*$/.test(value)) {
       setAmount(value);
       setPreview(false);
-      setConverted(false);
     }
   };
 
@@ -84,9 +87,13 @@ const ExchangeCard = ({
     setAmount(maxAmount.toString());
     setPreview(false);
     setConverted(false);
+    setErrorMessage("");
   };
 
   const handleSwap = () => {
+    setErrorMessage("");
+    setConverted(false);
+
     if (amount !== "" && !isNaN(Number(amount))) {
       const currentAmount = Number(amount);
 
@@ -99,62 +106,107 @@ const ExchangeCard = ({
 
     setSwapped((prev) => !prev);
     setPreview(false);
-    setConverted(false);
   };
 
   const handlePreview = () => {
+    setErrorMessage("");
+    setConverted(false);
+
     if (isEmpty) {
       return;
     }
 
     setPreview(true);
-    setConverted(false);
   };
 
   const handleConvertClick = () => {
-    if (!canConvert) {
+    setErrorMessage("");
+
+    if (!canConvert || processing) {
       return;
     }
 
     setShowConfirm(true);
   };
 
-  const handleConfirmConversion = () => {
-    if (!canConvert) {
+  const handleConfirmConversion = async () => {
+    if (!canConvert || processing) {
       return;
     }
 
-    const currentAmount = numericAmount;
-    const output = Number(outputAmount);
+    try {
+      setProcessing(true);
+      setErrorMessage("");
 
-    if (swapped) {
-      onConversionComplete?.({
-        gemsUsed: 0,
-        vesReceived: 0,
-        vesUsed: currentAmount,
-        gemsReceived: output,
-      });
-    } else {
-      onConversionComplete?.({
-        gemsUsed: currentAmount,
-        vesReceived: output,
-        vesUsed: 0,
-        gemsReceived: 0,
-      });
+      let response;
+
+      if (swapped) {
+        response = await fetch(
+          `${API_URL}/api/conversion/ves-to-gems`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ves: numericAmount,
+            }),
+          }
+        );
+      } else {
+        response = await fetch(
+          `${API_URL}/api/conversion/gems-to-ves`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              gems: numericAmount,
+            }),
+          }
+        );
+      }
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        setErrorMessage(
+          data.message || "Conversion failed"
+        );
+        return;
+      }
+
+      if (onConversionComplete) {
+        await onConversionComplete(data.balance)
+      }
+
+      setShowConfirm(false);
+      setConverted(true);
+      setErrorMessage("");
+
+      setTimeout(() => {
+        setAmount("");
+        setPreview(false);
+        setConverted(false);
+      }, 1800);
+    } catch (error) {
+      console.error("Conversion failed:", error);
+      setErrorMessage(
+        "Unable to connect to the conversion server"
+      );
+    } finally {
+      setProcessing(false);
     }
-
-    setShowConfirm(false);
-    setConverted(true);
-
-    setTimeout(() => {
-      setAmount("");
-      setPreview(false);
-      setConverted(false);
-    }, 1800);
   };
 
   const handleCancelConversion = () => {
+    if (processing) {
+      return;
+    }
+
     setShowConfirm(false);
+    setErrorMessage("");
   };
 
   return (
@@ -220,6 +272,7 @@ const ExchangeCard = ({
                         ? "VE amount"
                         : "Gems amount"
                     }
+                    disabled={processing}
                   />
 
                   <div className="amount-label">
@@ -234,6 +287,7 @@ const ExchangeCard = ({
                     type="button"
                     className="max-btn"
                     onClick={handleMax}
+                    disabled={processing}
                   >
                     MAX
                   </button>
@@ -254,6 +308,7 @@ const ExchangeCard = ({
               }`}
               onClick={handleSwap}
               aria-label="Swap conversion"
+              disabled={processing}
             >
               <ArrowLeftRight
                 size={22}
@@ -276,9 +331,7 @@ const ExchangeCard = ({
                 <div className="amount-content">
                   <div
                     className={`amount-output ${
-                      swapped
-                        ? "output-purple"
-                        : ""
+                      swapped ? "output-purple" : ""
                     }`}
                   >
                     {outputAmount}
@@ -313,6 +366,7 @@ const ExchangeCard = ({
               type="button"
               className="preview-btn"
               onClick={handlePreview}
+              disabled={processing}
             >
               <span>Preview Conversion</span>
               <ArrowRight
@@ -397,17 +451,27 @@ const ExchangeCard = ({
                   </div>
                 )}
 
+              {errorMessage && (
+                <div className="minimum-warning">
+                  <AlertCircle size={15} />
+
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               <button
                 type="button"
                 className={`convert-btn ${
-                  !canConvert
+                  !canConvert || processing
                     ? "convert-btn-disabled"
                     : ""
                 }`}
-                disabled={!canConvert}
+                disabled={!canConvert || processing}
                 onClick={handleConvertClick}
               >
-                {isBelowMinimum
+                {processing
+                  ? "Processing..."
+                  : isBelowMinimum
                   ? `Minimum ${MIN_GEMS} Gems`
                   : insufficientBalance
                   ? "Insufficient Balance"
@@ -444,6 +508,7 @@ const ExchangeCard = ({
               className="modal-close"
               onClick={handleCancelConversion}
               aria-label="Close"
+              disabled={processing}
             >
               <X size={19} />
             </button>
@@ -491,11 +556,19 @@ const ExchangeCard = ({
               Rate: 1 Gem = {GEM_TO_VE} VEs
             </div>
 
+            {errorMessage && (
+              <div className="minimum-warning">
+                <AlertCircle size={15} />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
             <div className="confirmation-actions">
               <button
                 type="button"
                 className="cancel-btn"
                 onClick={handleCancelConversion}
+                disabled={processing}
               >
                 Cancel
               </button>
@@ -504,8 +577,11 @@ const ExchangeCard = ({
                 type="button"
                 className="confirm-btn"
                 onClick={handleConfirmConversion}
+                disabled={processing}
               >
-                Yes, Convert
+                {processing
+                  ? "Processing..."
+                  : "Yes, Convert"}
               </button>
             </div>
           </div>
