@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import "../css/conversion.css";
 
-const API_URL = "https://veloop-a2i3.onrender.com/";
+const API_URL = "https://veloop-a2i3.onrender.com";
 
 const Conversion = ({
   availableGems = 0,
