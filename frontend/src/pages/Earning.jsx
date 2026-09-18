@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import Info from '../components/Info.jsx'
 import Work from '../components/Work'
 
-const API_URL = 'http://localhost:5000'
+const API_URL = 'https://veloop-a2i3.onrender.com/'
 
 const Earning = () => {
   const [balance, setBalance] = useState({
